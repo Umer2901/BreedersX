@@ -54,6 +54,7 @@ class _NewHerdState extends State<NewHerd> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Your Name',
                   hintText: 'Your Name',
                   fillColor: AppColors.white,
@@ -64,6 +65,7 @@ class _NewHerdState extends State<NewHerd> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Location',
                   hintText: 'Your Location',
                   fillColor: AppColors.white,
@@ -71,10 +73,11 @@ class _NewHerdState extends State<NewHerd> {
                 ),
                 SizedBox(height: 3.h),
                  Text(
-                  'Total Head',
+                  'Total Head Scored',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Total Head',
                   hintText: '12',
                   fillColor: AppColors.white,

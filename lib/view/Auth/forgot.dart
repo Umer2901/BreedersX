@@ -56,6 +56,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 ),
                   SizedBox(height: 1.h),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',
                   fillColor: AppColors.white,

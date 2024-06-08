@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',
                   fillColor: AppColors.white,
@@ -51,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 CustomTextField(
+                  enableBorder: true,
                   name: 'password',
                   hintText: 'Password',
                   obscureText: obsecurePassword,

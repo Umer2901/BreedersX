@@ -1,8 +1,6 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:breedex/constants/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String name;
@@ -10,7 +8,6 @@ class CustomTextField extends StatelessWidget {
   final Icon? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
-  final InputBorder? enableBorder;
   final String? Function(String?)? validator;
   final TextInputAction textInputAction;
   final Function()? onTap;
@@ -23,17 +20,19 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final int? minLines;
   final TextInputType keyboardType;
+  final bool enableBorder; 
+
   const CustomTextField({
-    super.key,
+    Key? key,
     required this.name,
     required this.hintText,
+    required this.enableBorder,
     this.onEditComplete,
     this.prefixIcon,
     this.suffixIcon,
     this.controller,
     this.onChanged,
     this.obscureText = false,
-    this.enableBorder,
     this.validator,
     this.initialValue,
     this.textInputAction = TextInputAction.done,
@@ -43,12 +42,12 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.name,
     this.maxLines = 1,
     this.minLines,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: FormBuilderTextField(
         textInputAction: textInputAction,
         validator: validator,
@@ -59,10 +58,7 @@ class CustomTextField extends StatelessWidget {
         name: name,
         readOnly: readOnly,
         initialValue: initialValue,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ,
+        style: Theme.of(context).textTheme.bodyText1, 
         cursorColor: AppColors.grey,
         obscureText: obscureText,
         keyboardType: keyboardType,
@@ -75,13 +71,13 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: Theme.of(context)
               .textTheme
-              .bodyMedium
+              .bodyText2 
               ?.copyWith(letterSpacing: 1, color: AppColors.darkGrey.withOpacity(0.5)),
           fillColor: fillColor,
           filled: true,
           enabled: true,
-          enabledBorder: enableBorder ?? AppColors.enableBorder,
-          focusedBorder: AppColors.kFocuseBorder,
+          enabledBorder: enableBorder ? AppColors.enableBorder : InputBorder.none, 
+          focusedBorder: enableBorder ? AppColors.kFocuseBorder : InputBorder.none, 
           errorBorder: AppColors.kErrorOutlineBorder,
           focusedErrorBorder: AppColors.kErrorOutlineBorder,
         ),

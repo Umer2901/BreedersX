@@ -1,4 +1,7 @@
+import 'package:breedex/model/listitem_model.dart';
+import 'package:breedex/view/home/Quiz/quiz3.dart';
 import 'package:breedex/view/home/Quiz/quiz5.dart';
+import 'package:breedex/view/widget/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/navigator.dart';
@@ -17,19 +20,31 @@ class Quiz4 extends StatefulWidget {
 
 class _Quiz4State extends State<Quiz4> {
   int selectedOption = -1;
-
+ final List<ListItem> items = [
+    ListItem(text: 'Movement: Free and comfortable; able to rise and lie down easy', percentage: '35%'),
+    ListItem(text: 'Feet: Steep angle and deep heel with short, well rounded, closed toes', percentage: '20%'),
+    ListItem(text: 'Legs: Front and Rear: Tracking straight, wide apart with feet squarely placed. Hocks: Cleanly molded, free from coarseness and puffiness with adequate flexibility.', percentage: '10%'),
+    ListItem(text: 'Rear legs - Side View: A moderate set (angle) to the hock.', percentage: '10%'),
+    ListItem(text: 'Thurl Position: Centrally placed between hip bones and pin bones', percentage: '15%'),
+    ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(50),
+         child: GestureDetector(
+            onTap: (){
+           AppCustomNavigator.pop(context);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: const Icon(Icons.arrow_back),
             ),
-            child: const Icon(Icons.arrow_back),
           ),
         ),
         title: Row(
@@ -55,8 +70,22 @@ class _Quiz4State extends State<Quiz4> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'What is your goal?',
+                  'What are your goals?',
                   style: Theme.of(context).textTheme.headlineLarge,
+                ),
+                SizedBox(height: 2.h),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                     '4-Mobility ',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Text(
+                      '20%',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 3.h),
                 Container(
@@ -76,14 +105,70 @@ class _Quiz4State extends State<Quiz4> {
                     ],
                   ),
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 4.h),
+                                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: items.map((item) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  item.text,
+                                style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+                              ),
+                              Text(
+                                item.percentage,
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Container(
+                            height: 20.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            width: double.infinity,
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: CustomTextField(
+                                enableBorder: false,
+                                name: 'Detail',
+                                hintText: 'Enter the details, Must be 1-50 words',
+                                fillColor: Colors.white,
+                                maxLines: 3, 
+                                minLines: 1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+                 SizedBox(height: 2.h),
+                Center(
+                  child: Text(
+                        'Your Score is: 97',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                ),
+               SizedBox(height: 2.h),
                 CustomButton(
                   text: 'Next',
                   onTap: () {
                     AppCustomNavigator.replace(context, const Quiz5());
                   },
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 2.h),
               ],
             ),
           ),

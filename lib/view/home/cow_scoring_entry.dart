@@ -53,6 +53,7 @@ class _CowScoringState extends State<CowScoring> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Cow Name',
                   hintText: 'Cow Name',
                   fillColor: AppColors.white,
@@ -63,6 +64,7 @@ class _CowScoringState extends State<CowScoring> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Date of Birth',
                   hintText: 'Date of Birth',
                   fillColor: AppColors.white,
@@ -70,20 +72,33 @@ class _CowScoringState extends State<CowScoring> {
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  'Dam and sire',
+                  'Dam',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
-                  name: 'Dam and sire',
-                  hintText: 'Dam and sire',
+                  enableBorder: true,
+                  name: 'Dam',
+                  hintText: 'Dam',
+                  fillColor: AppColors.white,
+                ),
+                  SizedBox(height: 3.h),
+                Text(
+                  'Sire',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const CustomTextField(
+                  enableBorder: true,
+                  name: 'Sire',
+                  hintText: 'Sire',
                   fillColor: AppColors.white,
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  'Time calved ',
+                  '# of Times Calved',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const CustomTextField(
+                  enableBorder: true,
                   name: 'Time calved ',
                   hintText: '12',
                   fillColor: AppColors.white,

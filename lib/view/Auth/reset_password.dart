@@ -56,7 +56,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                   SizedBox(height: 1.h),
-                CustomTextField(
+                CustomTextField(enableBorder: true,
                   name: 'New password',
                   hintText: 'New password',
                   obscureText: obsecurePassword,
@@ -80,7 +80,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                   SizedBox(height: 1.h),
-              CustomTextField(
+              CustomTextField(enableBorder: true,
                   name: 'New password',
                   hintText: 'Confirm New password',
                   obscureText: obsecurePassword,

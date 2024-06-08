@@ -1,6 +1,8 @@
 
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
+import 'package:breedex/navigator.dart';
+import 'package:breedex/view/home/Quiz/quiz.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/pop_complete.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +101,9 @@ class PopupDialog {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomButton(text: "Edit",color: AppColors.grey,width: 32.w,),
+                  CustomButton(text: "Edit",color: AppColors.grey,width: 32.w,onTap: () {
+                      AppCustomNavigator.replace(context, Quiz());
+                  },),
                   CustomButton(text: "Confirm",width: 32.w,onTap: () {
                     
                     PopupDialogComplete.show(context);

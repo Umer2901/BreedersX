@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Username',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const CustomTextField(
+                const CustomTextField(enableBorder: true,
                   name: 'username',
                   hintText: '@username',
                   fillColor: AppColors.white,
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Email Address',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const CustomTextField(
+                const CustomTextField(enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',
                   fillColor: AppColors.white,
@@ -61,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Password',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                CustomTextField(
+                CustomTextField(enableBorder: true,
                   name: 'password',
                   hintText: '*******',
                   obscureText: obsecurePassword,
@@ -85,6 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 CustomTextField(
+                  enableBorder: true,
                   name: 'Confirm Password',
                   hintText: '******',
                   obscureText: obsecurePassword,
