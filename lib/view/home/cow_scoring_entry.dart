@@ -162,7 +162,7 @@ SingleChildScrollView(
                 CustomButton(
                   text: 'Submit',
                   onTap: () {
-                    AppCustomNavigator.replace(context, Quiz());
+                    AppCustomNavigator.push(context, Quiz());
                   },
                 ),
                 SizedBox(height: 4.h),

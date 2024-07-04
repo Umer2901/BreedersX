@@ -159,7 +159,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Container(
                       width: 30.w,
-                      child: Image.asset(AppImages.apple),
+                      child: GestureDetector(
+                        onTap: () async {
+                          final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                          await authProvider.signInWithApple(context);
+
+                          if (authProvider.user != null) {
+                            AppCustomNavigator.replace(context, NewHerd());
+                          }
+                        },
+                        child: Image.asset(AppImages.apple),
+                      ),
                     ),
                   ],
                 ),

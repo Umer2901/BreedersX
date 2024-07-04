@@ -1,6 +1,9 @@
+import 'package:breedex/navigator.dart';
+import 'package:breedex/view/Auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -43,7 +46,7 @@ class AuthProvider with ChangeNotifier {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        // The user canceled the sign-in
+        AppCustomNavigator.replace(context, LoginScreen());
         return;
       }
 
@@ -54,6 +57,30 @@ class AuthProvider with ChangeNotifier {
       );
 
       UserCredential userCredential = await _auth.signInWithCredential(credential);
+      _user = userCredential.user;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');
+    } catch (e) {
+      _showErrorSnackbar(context, 'An unknown error occurred');
+    }
+  }
+
+  Future<void> signInWithApple(BuildContext context) async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      UserCredential userCredential = await _auth.signInWithCredential(oauthCredential);
       _user = userCredential.user;
       notifyListeners();
     } on FirebaseAuthException catch (e) {
