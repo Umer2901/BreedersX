@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+class AuthProvider with ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  User? _user;
+
+  User? get user => _user;
+
+  Future<void> registerWithEmailAndPassword(BuildContext context, String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      _user = userCredential.user;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');
+    }
+  }
+
+  Future<void> loginWithEmailAndPassword(BuildContext context, String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      _user = userCredential.user;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');
+    }
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      _user = null;
+      notifyListeners();
+    } catch (e) {
+      _showErrorSnackbar(context, 'Failed to sign out');
+    }
+  }
+
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        // The user canceled the sign-in
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      _user = userCredential.user;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');
+    } catch (e) {
+      _showErrorSnackbar(context, 'An unknown error occurred');
+    }
+  }
+
+  void _showErrorSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+}

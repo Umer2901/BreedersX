@@ -12,7 +12,7 @@ class PopupDialogComplete {
       context: context,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.40, // Set height to 25% of the screen height
+          heightFactor: 0.40, 
           child: AlertDialog(
             backgroundColor: AppColors.white,
             title: Column(
