@@ -6,8 +6,6 @@ import 'package:breedex/view/home/Quiz/quiz.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 
-
-
 class CowScoring extends StatefulWidget {
   const CowScoring({super.key});
 
@@ -18,7 +16,11 @@ class CowScoring extends StatefulWidget {
 class _CowScoringState extends State<CowScoring> {
   int selectedIndex = 0;
 
-  List<String> options = ["Milk production", "Body condition", "Reproduction metrics"]; 
+  List<String> options = [
+    "Milk production",
+    "Body condition",
+    "Reproduction metrics"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class _CowScoringState extends State<CowScoring> {
           'Cow Scoring Entry',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,7 +71,8 @@ class _CowScoringState extends State<CowScoring> {
                   name: 'Date of Birth',
                   hintText: 'Date of Birth',
                   fillColor: AppColors.white,
-                  suffixIcon: Icon(Icons.calendar_month, color: AppColors.primary),
+                  suffixIcon:
+                      Icon(Icons.calendar_month, color: AppColors.primary),
                 ),
                 SizedBox(height: 3.h),
                 Text(
@@ -81,7 +85,7 @@ class _CowScoringState extends State<CowScoring> {
                   hintText: 'Dam',
                   fillColor: AppColors.white,
                 ),
-                  SizedBox(height: 3.h),
+                SizedBox(height: 3.h),
                 Text(
                   'Sire',
                   style: Theme.of(context).textTheme.bodyMedium,
@@ -113,56 +117,62 @@ class _CowScoringState extends State<CowScoring> {
                     ),
                     Text(
                       'See all',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.primary),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: AppColors.primary),
                     ),
                   ],
                 ),
-               SizedBox(height: 4.h),
-SingleChildScrollView(
-  scrollDirection: Axis.horizontal,
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: List.generate(options.length, (index) {
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedIndex = index; 
-          });
-        },
-        child: Container(
-          //width: 50,
-         height: 35.sp,
-          margin: EdgeInsets.symmetric(horizontal: 3.sp) ,
-          decoration: BoxDecoration(
-            color: index == selectedIndex ? AppColors.primary : AppColors.white,
-            borderRadius: BorderRadius.circular(25), 
-            border: Border.all(
-              color: AppColors.black, 
-              width: 1, 
-            ),
-          ),
-          child: Center(
-            child: Padding(
-              padding:  EdgeInsets.all(8.sp),
-              child: Text(
-                options[index],
-                style: TextStyle(
-                  color: index == selectedIndex ? AppColors.white : AppColors.black,
+                SizedBox(height: 4.h),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(options.length, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        child: Container(
+                          //width: 50,
+                          height: 35.sp,
+                          margin: EdgeInsets.symmetric(horizontal: 3.sp),
+                          decoration: BoxDecoration(
+                            color: index == selectedIndex
+                                ? AppColors.primary
+                                : AppColors.white,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: AppColors.black,
+                              width: 1,
+                            ),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.sp),
+                              child: Text(
+                                options[index],
+                                style: TextStyle(
+                                  color: index == selectedIndex
+                                      ? AppColors.white
+                                      : AppColors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }),
-  ),
-),
-
                 SizedBox(height: 4.h),
                 CustomButton(
                   text: 'Submit',
                   onTap: () {
-                    AppCustomNavigator.push(context, Quiz());
+                    AppCustomNavigator.push(context, const Quiz());
                   },
                 ),
                 SizedBox(height: 4.h),

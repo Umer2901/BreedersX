@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:breedex/view/splash_screen.dart';
-import 'package:breedex/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:breedex/provider/auth_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
-import 'package:breedex/provider/splash_provider.dart';
+
+
 
 
 void main() async{

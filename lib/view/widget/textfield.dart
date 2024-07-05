@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
         name: name,
         readOnly: readOnly,
         initialValue: initialValue,
-        style: Theme.of(context).textTheme.bodyMedium, 
+        style: Theme.of(context).textTheme.bodySmall, 
         cursorColor: AppColors.grey,
         obscureText: obscureText,
         keyboardType: keyboardType,
@@ -71,7 +71,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: Theme.of(context)
               .textTheme
-              .bodyMedium 
+              .bodySmall 
               ?.copyWith(letterSpacing: 1, color: AppColors.darkGrey.withOpacity(0.5)),
           fillColor: fillColor,
           filled: true,
