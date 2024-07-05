@@ -1,10 +1,10 @@
 import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/provider/splash_provider.dart';
+import 'package:breedex/view/home/new_herd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/constants/colors.dart';
-import 'package:breedex/constants/images.dart';
 import 'package:breedex/navigator.dart';
-import 'package:breedex/view/Auth/forgot.dart';
 import 'package:breedex/view/Auth/login.dart';
 import 'package:breedex/view/splash_screen.dart';
 import 'package:breedex/view/widget/custom_button.dart';
@@ -103,32 +103,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 SizedBox(height: 3.h),
-                CustomButton(
-                  text: 'Register',
-                  onTap: () async {
-                    if (_passwordController.text != _confirmPasswordController.text) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Passwords do not match')),
-                      );
-                      return;
-                    }
+                Consumer<LoadingProvider>(
+                  builder: (context, loadingProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Register',
+                          onTap: () async {
+                            if (_passwordController.text != _confirmPasswordController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Passwords do not match')),
+                              );
+                              return;
+                            }
 
-                    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                    try {
-                      await authProvider.registerWithEmailAndPassword(
-                        context,
-                        _emailController.text,
-                        _passwordController.text,
-                      );
+                            final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                            final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+                            loadingProvider.setLoading(true);
+                            try {
+                              await authProvider.registerWithEmailAndPassword(
+                                context,
+                                _emailController.text,
+                                _passwordController.text,
+                              );
 
-                      if (authProvider.user != null) {
-                        AppCustomNavigator.replace(context, SplashScreen());
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Registration failed: $e')),
-                      );
-                    }
+                              if (authProvider.user != null) {
+                                AppCustomNavigator.replace(context, NewHerd());
+                              }
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Registration failed: $e')),
+                              );
+                            } finally {
+                              loadingProvider.setLoading(false);
+                            }
+                          },
+                        ),
+                        if (loadingProvider.isLoading)
+                          CircularProgressIndicator(),
+                      ],
+                    );
                   },
                 ),
                 SizedBox(height: 3.h),

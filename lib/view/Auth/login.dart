@@ -1,4 +1,5 @@
 import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/provider/splash_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/constants/colors.dart';
@@ -90,25 +91,40 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                CustomButton(
-                  text: 'Log in',
-                  onTap: () async {
-                    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                    try {
-                      await authProvider.loginWithEmailAndPassword(
-                        context, // Pass the context here
-                        _emailController.text,
-                        _passwordController.text,
-                      );
+                Consumer<LoadingProvider>(
+                  builder: (context, loadingProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Log in',
+                          onTap: () async {
+                            final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                            final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+                            loadingProvider.setLoading(true);
+                            try {
+                              await authProvider.loginWithEmailAndPassword(
+                                context, 
+                                _emailController.text,
+                                _passwordController.text,
+                              );
 
-                      if (authProvider.user != null) {
-                        AppCustomNavigator.replace(context, NewHerd());
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Login failed: $e')),
-                      );
-                    }
+                              if (authProvider.user != null) {
+                                AppCustomNavigator.replace(context, NewHerd());
+                              }
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Login failed: $e')),
+                              );
+                            } finally {
+                              loadingProvider.setLoading(false);
+                            }
+                          },
+                        ),
+                        SizedBox(height: 1.h,),
+                        if (loadingProvider.isLoading)
+                          CircularProgressIndicator(),
+                      ],
+                    );
                   },
                 ),
                 SizedBox(height: 4.h),
@@ -143,15 +159,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 30.w,
                       child: Image.asset(AppImages.facebook),
                     ),
-                   Container(
+                    Container(
                       width: 30.w,
                       child: GestureDetector(
                         onTap: () async {
                           final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                          await authProvider.signInWithGoogle(context);
-
-                          if (authProvider.user != null) {
-                            AppCustomNavigator.replace(context, NewHerd());
+                          final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+                          loadingProvider.setLoading(true);
+                          try {
+                            await authProvider.signInWithGoogle(context);
+                            if (authProvider.user != null) {
+                              AppCustomNavigator.replace(context, NewHerd());
+                            }
+                          } finally {
+                            loadingProvider.setLoading(false);
                           }
                         },
                         child: Image.asset(AppImages.google),
@@ -162,10 +183,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: GestureDetector(
                         onTap: () async {
                           final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                          await authProvider.signInWithApple(context);
-
-                          if (authProvider.user != null) {
-                            AppCustomNavigator.replace(context, NewHerd());
+                          final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+                          loadingProvider.setLoading(true);
+                          try {
+                            await authProvider.signInWithApple(context);
+                            if (authProvider.user != null) {
+                              AppCustomNavigator.replace(context, NewHerd());
+                            }
+                          } finally {
+                            loadingProvider.setLoading(false);
                           }
                         },
                         child: Image.asset(AppImages.apple),
