@@ -88,7 +88,7 @@ class _NewHerdState extends State<NewHerd> {
                 CustomButton(
                   text: 'Next',
                   onTap: () {
-                    AppCustomNavigator.replace(context,const CowScoring());
+                    AppCustomNavigator.push(context,CowScoring());
                   },
                 ),
                 SizedBox(height: 4.h),
