@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:breedex/constants/colors.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class CustomTextField extends StatelessWidget {
   final String name;
@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
   final bool enableBorder; 
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.name,
     required this.hintText,
     required this.enableBorder,
@@ -42,7 +42,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.name,
     this.maxLines = 1,
     this.minLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
         name: name,
         readOnly: readOnly,
         initialValue: initialValue,
-        style: Theme.of(context).textTheme.bodyText1, 
+        style: Theme.of(context).textTheme.bodySmall, 
         cursorColor: AppColors.grey,
         obscureText: obscureText,
         keyboardType: keyboardType,
@@ -71,7 +71,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: Theme.of(context)
               .textTheme
-              .bodyText2 
+              .bodySmall 
               ?.copyWith(letterSpacing: 1, color: AppColors.darkGrey.withOpacity(0.5)),
           fillColor: fillColor,
           filled: true,

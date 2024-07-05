@@ -1,12 +1,20 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/provider/splash_provider.dart';
-import 'package:breedex/view/splash_screen.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:breedex/view/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/provider/splash_provider.dart';
 
-void main() {
+
+
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  );
   runApp(const MyApp());
 }
 
@@ -17,8 +25,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return ChangeNotifierProvider(
-      create: (context) => LoadingProvider(),
+        return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => LoadingProvider()),
+      ],
+     
+       
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Breedex',
@@ -63,7 +76,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
                 useMaterial3: true,
               ),
-          home: SplashScreen(),
+          home: const SplashScreen(),
           )  );
       }
     );

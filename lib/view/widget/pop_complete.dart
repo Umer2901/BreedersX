@@ -1,10 +1,10 @@
-
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sizer/sizer.dart';
+
+
+
 
 class PopupDialogComplete {
   static void show(BuildContext context) {
@@ -12,14 +12,14 @@ class PopupDialogComplete {
       context: context,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.40, // Set height to 25% of the screen height
+          heightFactor: 0.40, 
           child: AlertDialog(
             backgroundColor: AppColors.white,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.topRight,
                     child: Icon(Icons.cancel_outlined)),
                   SizedBox(

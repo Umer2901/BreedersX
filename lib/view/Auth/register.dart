@@ -1,25 +1,30 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/constants/images.dart';
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/Auth/forgot.dart';
-import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/splash_screen.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:provider/provider.dart';
+import 'package:breedex/view/Auth/login.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/splash_screen.dart';
+import 'package:breedex/view/widget/textfield.dart';
+import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+// ignore_for_file: use_build_context_synchronously
+
+
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool obsecurePassword = true;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,20 +43,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'Username',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const CustomTextField(enableBorder: true,
-                  name: 'username',
-                  hintText: '@username',
-                  fillColor: AppColors.white,
-                ),
-                SizedBox(height: 3.h),
-                Text(
                   'Email Address',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const CustomTextField(enableBorder: true,
+                CustomTextField(
+                  controller: _emailController,
+                  enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',
                   fillColor: AppColors.white,
@@ -61,7 +58,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Password',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                CustomTextField(enableBorder: true,
+                CustomTextField(
+                  controller: _passwordController,
+                  enableBorder: true,
                   name: 'password',
                   hintText: '*******',
                   obscureText: obsecurePassword,
@@ -79,14 +78,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                 SizedBox(height: 3.h),
+                SizedBox(height: 3.h),
                 Text(
                   'Confirm Password',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 CustomTextField(
+                  controller: _confirmPasswordController,
                   enableBorder: true,
-                  name: 'Confirm Password',
+                  name: 'confirm_password',
                   hintText: '******',
                   obscureText: obsecurePassword,
                   fillColor: AppColors.white,
@@ -103,76 +103,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 1.h),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    child: Text(
-                    'Forget Password?',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    onPressed: (){
-                      AppCustomNavigator.push(context, ForgotScreen());
-                    }
-                  ),
-                ),
                 SizedBox(height: 3.h),
                 CustomButton(
                   text: 'Register',
-                  onTap: () {
-                    AppCustomNavigator.replace(context, SplashScreen());
+                  onTap: () async {
+                    if (_passwordController.text != _confirmPasswordController.text) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Passwords do not match')),
+                      );
+                      return;
+                    }
+
+                    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                    try {
+                      await authProvider.registerWithEmailAndPassword(
+                        context,
+                        _emailController.text,
+                        _passwordController.text,
+                      );
+
+                      if (authProvider.user != null) {
+                        AppCustomNavigator.replace(context, const SplashScreen());
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Registration failed: $e')),
+                      );
+                    }
                   },
                 ),
                 SizedBox(height: 3.h),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Divider(
-                        color: AppColors.grey,
-                        thickness: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.sp),
-                      child: Text(
-                        'Or Login with',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                    const Expanded(
-                      child: Divider(
-                        color: AppColors.grey,
-                        thickness: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 2.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 30.w,
-                      child: Image.asset(AppImages.facebook),
-                    ),
-                    Container(
-                      width: 30.w,
-                      child: Image.asset(AppImages.google),
-                    ),
-                    Container(
-                      width: 30.w,
-                      child: Image.asset(AppImages.apple),
-                    ),
-                  ],
-                ),
-                 
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
-                      onTap: (){
-                        AppCustomNavigator.replace(context, LoginScreen());
+                      onTap: () {
+                        AppCustomNavigator.replace(context, const LoginScreen());
                       },
                       child: Text.rich(
                         TextSpan(

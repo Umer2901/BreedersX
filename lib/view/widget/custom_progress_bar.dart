@@ -8,7 +8,7 @@ class CustomLinearProgressBar extends StatelessWidget {
   final Color backgroundColor;
   final String? text;
 
-  CustomLinearProgressBar({
+  const CustomLinearProgressBar({super.key, 
     required this.maxSteps,
     required this.currentStep,
     this.text,
@@ -25,7 +25,7 @@ class CustomLinearProgressBar extends StatelessWidget {
     double progressWidth = currentStep * stepWidth / 1.5;
 
     return Center(
-      child: Container(
+      child: SizedBox(
         height: progressHeight,
         child: Stack(
           children: [
@@ -53,7 +53,7 @@ class CustomLinearProgressBar extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   text ?? "",
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

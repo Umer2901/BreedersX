@@ -1,15 +1,15 @@
-import 'package:breedex/constants/colors.dart';
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/Auth/otp.dart';
-import 'package:breedex/view/Auth/password_changed.dart';
-import 'package:breedex/view/widget/custom_button.dart';
+import 'package:breedex/constants/colors.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+import 'package:breedex/view/Auth/password_changed.dart';
+
 
 class ResetPassword extends StatefulWidget {
-  const ResetPassword({Key? key});
+  const ResetPassword({super.key});
 
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
@@ -29,7 +29,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               color: AppColors.grey,
               borderRadius: BorderRadius.circular(50,),
             ),
-            child: Icon(Icons.arrow_back),
+            child: const Icon(Icons.arrow_back),
           ),
         ),
       ),
@@ -103,7 +103,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 CustomButton(
                   text: 'Reset password',
                   onTap: () {
-                    AppCustomNavigator.push(context, PasswordChange());
+                    AppCustomNavigator.push(context, const PasswordChange());
                   },
                 ),
                 
@@ -114,7 +114,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
                       onTap: (){
-                        AppCustomNavigator.replace(context, LoginScreen());
+                        AppCustomNavigator.replace(context, const LoginScreen());
                       },
                       child: Text.rich(
                         TextSpan(
