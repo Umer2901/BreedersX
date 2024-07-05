@@ -1,16 +1,16 @@
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/forgot.dart';
 import 'package:breedex/view/Auth/register.dart';
 import 'package:breedex/view/home/new_herd.dart';
-import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/widget/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomButton(
                   text: 'Log in',
                   onTap: () {
-                 AppCustomNavigator.push(context,NewHerd());
+                 AppCustomNavigator.push(context,const NewHerd());
                   },
                 ),
                 SizedBox(height: 4.h),
@@ -118,15 +118,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.facebook),
                     ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.google),
                     ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.apple),
                     ),
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
                       onTap: (){
-                         AppCustomNavigator.push(context,RegisterScreen());
+                         AppCustomNavigator.push(context,const RegisterScreen());
                       },
                       child: Text.rich(
                         TextSpan(

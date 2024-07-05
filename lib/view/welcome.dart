@@ -1,13 +1,15 @@
+import 'package:sizer/sizer.dart';
+import '../constants/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:flutter/material.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/widget/custom_button.dart';
 
-import '../constants/colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: 50.w,
                 height: 5.5.h,
                 onTap: (){
-AppCustomNavigator.replace(context , LoginScreen());
+AppCustomNavigator.replace(context , const LoginScreen());
                 }
                
                 ),

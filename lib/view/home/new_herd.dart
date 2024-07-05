@@ -1,17 +1,15 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/constants/images.dart';
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/Auth/register.dart';
-import 'package:breedex/view/home/cow_scoring_entry.dart';
-import 'package:breedex/view/splash_screen.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/widget/textfield.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+import 'package:breedex/view/home/cow_scoring_entry.dart';
+
+
 
 class NewHerd extends StatefulWidget {
-  const NewHerd({Key? key});
+  const NewHerd({super.key});
 
   @override
   State<NewHerd> createState() => _NewHerdState();
@@ -30,7 +28,7 @@ class _NewHerdState extends State<NewHerd> {
               color: AppColors.grey,
               borderRadius: BorderRadius.circular(50,),
             ),
-            child: Icon(Icons.arrow_back),
+            child: const Icon(Icons.arrow_back),
           ),
         ),
         title: Text(
@@ -90,7 +88,7 @@ class _NewHerdState extends State<NewHerd> {
                 CustomButton(
                   text: 'Next',
                   onTap: () {
-                    AppCustomNavigator.replace(context,CowScoring());
+                    AppCustomNavigator.replace(context,const CowScoring());
                   },
                 ),
                 SizedBox(height: 4.h),

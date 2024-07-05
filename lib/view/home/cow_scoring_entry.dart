@@ -1,15 +1,15 @@
-import 'package:breedex/view/home/Quiz/quiz.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/view/Auth/register.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:breedex/navigator.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/home/Quiz/quiz.dart';
+import 'package:breedex/view/widget/textfield.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+
+
 
 class CowScoring extends StatefulWidget {
-  const CowScoring({Key? key}) : super(key: key);
+  const CowScoring({super.key});
 
   @override
   State<CowScoring> createState() => _CowScoringState();
@@ -31,7 +31,7 @@ class _CowScoringState extends State<CowScoring> {
               color: AppColors.grey,
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Icon(Icons.arrow_back),
+            child: const Icon(Icons.arrow_back),
           ),
         ),
         title: Text(
@@ -162,7 +162,7 @@ SingleChildScrollView(
                 CustomButton(
                   text: 'Submit',
                   onTap: () {
-                    AppCustomNavigator.replace(context, Quiz());
+                    AppCustomNavigator.replace(context, const Quiz());
                   },
                 ),
                 SizedBox(height: 4.h),

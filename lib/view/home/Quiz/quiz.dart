@@ -1,18 +1,18 @@
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:breedex/constants/colors.dart';
 import 'package:breedex/model/listitem_model.dart';
 import 'package:breedex/view/home/Quiz/quiz2.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/home/cow_scoring_entry.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sizer/sizer.dart';
+
+
+
 
 class Quiz extends StatefulWidget {
-  const Quiz({Key? key});
+  const Quiz({super.key});
 
   @override
   State<Quiz> createState() => _QuizState();
@@ -55,7 +55,7 @@ class _QuizState extends State<Quiz> {
           children: [
             SizedBox(
               width: 67.w,
-              child: CustomLinearProgressBar(maxSteps: 5, currentStep: 1),
+              child: const CustomLinearProgressBar(maxSteps: 5, currentStep: 1),
             ),
             Text(
               "1/5",
@@ -132,7 +132,7 @@ class _QuizState extends State<Quiz> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Container(
                             height: 20.h,
                             decoration: BoxDecoration(
@@ -140,8 +140,8 @@ class _QuizState extends State<Quiz> {
                               border: Border.all(color: Colors.grey),
                             ),
                             width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const  Padding(
+                              padding:  EdgeInsets.all(8.0),
                               child: CustomTextField(
                                 enableBorder: false,
                                 name: 'Detail',

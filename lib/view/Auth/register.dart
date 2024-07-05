@@ -1,17 +1,17 @@
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:breedex/view/Auth/login.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/forgot.dart';
-import 'package:breedex/view/Auth/login.dart';
 import 'package:breedex/view/splash_screen.dart';
-import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     onPressed: (){
-                      AppCustomNavigator.push(context, ForgotScreen());
+                      AppCustomNavigator.push(context, const ForgotScreen());
                     }
                   ),
                 ),
@@ -120,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomButton(
                   text: 'Register',
                   onTap: () {
-                    AppCustomNavigator.replace(context, SplashScreen());
+                    AppCustomNavigator.replace(context, const SplashScreen());
                   },
                 ),
                 SizedBox(height: 3.h),
@@ -151,15 +151,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.facebook),
                     ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.google),
                     ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: Image.asset(AppImages.apple),
                     ),
@@ -172,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
                       onTap: (){
-                        AppCustomNavigator.replace(context, LoginScreen());
+                        AppCustomNavigator.replace(context, const LoginScreen());
                       },
                       child: Text.rich(
                         TextSpan(

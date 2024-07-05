@@ -1,18 +1,20 @@
-import 'package:breedex/model/listitem_model.dart';
-import 'package:breedex/view/home/Quiz/quiz3.dart';
-import 'package:breedex/view/home/Quiz/quiz5.dart';
-import 'package:breedex/view/widget/textfield.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:breedex/constants/colors.dart';
 import 'package:breedex/navigator.dart';
-import 'package:breedex/view/home/cow_scoring_entry.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/home/Quiz/quiz5.dart';
+import 'package:breedex/model/listitem_model.dart';
+import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sizer/sizer.dart';
+
+
+
+
+
 
 class Quiz4 extends StatefulWidget {
-  const Quiz4({Key? key});
+  const Quiz4({super.key});
 
   @override
   State<Quiz4> createState() => _Quiz4State();
@@ -52,7 +54,7 @@ class _Quiz4State extends State<Quiz4> {
           children: [
             SizedBox(
               width: 67.w,
-              child: CustomLinearProgressBar(maxSteps: 5, currentStep: 4),
+              child: const CustomLinearProgressBar(maxSteps: 5, currentStep: 4),
             ),
             Text(
               "4/5",
@@ -129,7 +131,7 @@ class _Quiz4State extends State<Quiz4> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Container(
                             height: 20.h,
                             decoration: BoxDecoration(
