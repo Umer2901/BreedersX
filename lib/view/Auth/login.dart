@@ -155,10 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      width: 30.w,
-                      child: Image.asset(AppImages.facebook),
-                    ),
+                    // Container(
+                    //   width: 30.w,
+                    //   child: Image.asset(AppImages.facebook),
+                    // ),
                     Container(
                       width: 30.w,
                       child: GestureDetector(
@@ -178,25 +178,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Image.asset(AppImages.google),
                       ),
                     ),
-                    Container(
-                      width: 30.w,
-                      child: GestureDetector(
-                        onTap: () async {
-                          final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                          final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
-                          loadingProvider.setLoading(true);
-                          try {
-                            await authProvider.signInWithApple(context);
-                            if (authProvider.user != null) {
-                              AppCustomNavigator.replace(context, NewHerd());
-                            }
-                          } finally {
-                            loadingProvider.setLoading(false);
-                          }
-                        },
-                        child: Image.asset(AppImages.apple),
-                      ),
-                    ),
+                    // Container(
+                    //   width: 30.w,
+                    //   child: GestureDetector(
+                    //     onTap: () async {
+                    //       final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                    //       final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
+                    //       loadingProvider.setLoading(true);
+                    //       try {
+                    //         await authProvider.signInWithApple(context);
+                    //         if (authProvider.user != null) {
+                    //           AppCustomNavigator.replace(context, NewHerd());
+                    //         }
+                    //       } finally {
+                    //         loadingProvider.setLoading(false);
+                    //       }
+                    //     },
+                    //     child: Image.asset(AppImages.apple),
+                    //   ),
+                    // ),
                   ],
                 ),
                 SizedBox(height: 12.h),
