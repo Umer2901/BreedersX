@@ -11,7 +11,6 @@ import 'package:breedex/model/scoring_entery_model.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-// ignore_for_file: use_build_context_synchronously
 
 class CowScoring extends StatefulWidget {
   const CowScoring({super.key});
