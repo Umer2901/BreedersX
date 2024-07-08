@@ -10,6 +10,7 @@ class HerdServices {
         await _herdCollection.doc(value.id).update({'id': value.id});
       });
     } catch (e) {
+      // ignore: avoid_print
       print('Error adding herd: $e');
     }
   }

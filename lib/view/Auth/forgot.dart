@@ -1,16 +1,18 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/Auth/otp.dart';
-import 'package:breedex/provider/splash_provider.dart';
-import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/Auth/otp.dart';
-import 'package:breedex/view/Auth/password_changed.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
 import 'package:provider/provider.dart';
+import 'package:breedex/view/Auth/login.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/provider/splash_provider.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+import 'package:breedex/view/Auth/password_changed.dart';
+// ignore_for_file: use_build_context_synchronously
+
+
+
 
 class ForgotScreen extends StatefulWidget {
   const ForgotScreen({super.key});
@@ -37,7 +39,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
               onTap: (){
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back)),
+              child: const Icon(Icons.arrow_back)),
           ),
         ),
       ),
@@ -73,7 +75,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 Consumer<LoadingProvider>(
                   builder: (context, loadingProvider, child) {
                     return loadingProvider.isLoading
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : CustomButton(
                             text: 'Send Code',
                             onTap: () async {
@@ -82,7 +84,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                               final authProvider = Provider.of<AuthProvider>(context, listen: false);
                               await authProvider.sendPasswordResetEmail(context, _emailController.text);
                               loadingProvider.setLoading(false);
-                              AppCustomNavigator.push(context, PasswordChange());
+                              AppCustomNavigator.push(context, const PasswordChange());
                             },
                           );
                   },
@@ -94,7 +96,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
                       onTap: () {
-                        AppCustomNavigator.replace(context, LoginScreen());
+                        AppCustomNavigator.replace(context, const LoginScreen());
                       },
                       child: Text.rich(
                         TextSpan(

@@ -96,7 +96,7 @@ class AuthProvider with ChangeNotifier {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Password reset email sent')),
+        const SnackBar(content: Text('Password reset email sent')),
       );
     } on FirebaseAuthException catch (e) {
       _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');

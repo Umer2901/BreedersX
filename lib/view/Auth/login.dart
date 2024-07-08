@@ -1,3 +1,4 @@
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
@@ -6,6 +7,7 @@ import 'package:breedex/constants/images.dart';
 import 'package:breedex/view/Auth/forgot.dart';
 import 'package:breedex/view/Auth/register.dart';
 import 'package:breedex/view/home/new_herd.dart';
+import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/auth_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
@@ -109,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
 
                               if (authProvider.user != null) {
-                                AppCustomNavigator.replace(context, NewHerd());
+                                AppCustomNavigator.replace(context, const NewHerd());
                               }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -122,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 1.h,),
                         if (loadingProvider.isLoading)
-                          CircularProgressIndicator(),
+                          const CircularProgressIndicator(),
                       ],
                     );
                   },
@@ -159,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 30.w,
                       child: Image.asset(AppImages.facebook),
                     ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: GestureDetector(
                         onTap: () async {
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           try {
                             await authProvider.signInWithGoogle(context);
                             if (authProvider.user != null) {
-                              AppCustomNavigator.replace(context, NewHerd());
+                              AppCustomNavigator.replace(context, const NewHerd());
                             }
                           } finally {
                             loadingProvider.setLoading(false);
@@ -188,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           try {
                             await authProvider.signInWithApple(context);
                             if (authProvider.user != null) {
-                              AppCustomNavigator.replace(context, NewHerd());
+                              AppCustomNavigator.replace(context, const NewHerd());
                             }
                           } finally {
                             loadingProvider.setLoading(false);
