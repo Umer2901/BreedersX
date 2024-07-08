@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   width: 30.w,
                     //   child: Image.asset(AppImages.facebook),
                     // ),
-                    Container(
+                    SizedBox(
                       width: 30.w,
                       child: GestureDetector(
                         onTap: () async {

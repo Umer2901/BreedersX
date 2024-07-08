@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "675925959804",
-    "project_id": "breedex-f0982",
-    "storage_bucket": "breedex-f0982.appspot.com"
+    "project_number": "904534866902",
+    "project_id": "breedex-8ce46",
+    "storage_bucket": "breedex-8ce46.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:675925959804:android:1153ee56523ecb965295f9",
+        "mobilesdk_app_id": "1:904534866902:android:d61e7c91c561500005c277",
         "android_client_info": {
-          "package_name": "com.example.breedex"
+          "package_name": "com.production.breedex"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAFGuSdSCsWEesvEXaYqjRNiFfXFjpMt8s"
+          "current_key": "AIzaSyCzFEXKKnnVl0JKM1koQBZVKqfQ9YPzjTA"
         }
       ],
       "services": {

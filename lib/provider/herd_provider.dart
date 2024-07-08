@@ -3,7 +3,6 @@ import 'package:breedex/model/herd_model.dart';
 import 'package:breedex/services/herd_services.dart';
 
 
-
 class HerdProvider with ChangeNotifier {
   final HerdServices _herdServices = HerdServices();
   bool _isLoading = false;
