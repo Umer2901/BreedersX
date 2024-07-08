@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:breedex/provider/herd_provider.dart';
 import 'package:breedex/provider/auth_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
+import 'package:breedex/provider/scoring_entry_provider.dart';
 
 
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => LoadingProvider()),
          ChangeNotifierProvider(create: (_) => HerdProvider()),
+         ChangeNotifierProvider(create: (_) => CowScoringEntryProvider()),
       ],
      
        
