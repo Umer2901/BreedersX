@@ -1,10 +1,10 @@
-
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sizer/sizer.dart';
+
+
+
 
 class PopupDialogComplete {
   static void show(BuildContext context) {
@@ -19,7 +19,7 @@ class PopupDialogComplete {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.topRight,
                     child: Icon(Icons.cancel_outlined)),
                   SizedBox(

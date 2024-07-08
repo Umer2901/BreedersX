@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/login.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// ignore_for_file: use_build_context_synchronously
+
 
 class AuthProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,7 +48,7 @@ class AuthProvider with ChangeNotifier {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        AppCustomNavigator.replace(context, LoginScreen());
+        AppCustomNavigator.replace(context, const LoginScreen());
         return;
       }
 
@@ -94,7 +96,7 @@ class AuthProvider with ChangeNotifier {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Password reset email sent')),
+        const SnackBar(content: Text('Password reset email sent')),
       );
     } on FirebaseAuthException catch (e) {
       _showErrorSnackbar(context, e.message ?? 'An unknown error occurred');

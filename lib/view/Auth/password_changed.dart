@@ -1,12 +1,13 @@
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/constants/images.dart';
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/Auth/otp.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/constants/images.dart';
 import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+
+
+
 
 class PasswordChange extends StatefulWidget {
   const PasswordChange({super.key});
@@ -34,7 +35,7 @@ class _PasswordChangeState extends State<PasswordChange> {
               onTap: (){
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back)),
+              child: const Icon(Icons.arrow_back)),
           ),
         ),
       ),
@@ -48,7 +49,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                 mainAxisAlignment: MainAxisAlignment.center,
                
                 children: [
-                  Container(
+                  SizedBox(
                     height: 35.h,
                     width: 50.w,
                     child: Image.asset(AppImages.logo)),
@@ -66,7 +67,7 @@ class _PasswordChangeState extends State<PasswordChange> {
                   CustomButton(
                     text: 'Back to Login',
                     onTap: () {
-                      AppCustomNavigator.replace(context, LoginScreen());
+                      AppCustomNavigator.replace(context, const LoginScreen());
                     },
                   ),
                   

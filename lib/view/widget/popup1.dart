@@ -1,12 +1,12 @@
-
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
-import 'package:breedex/navigator.dart';
 import 'package:breedex/view/home/Quiz/quiz.dart';
-import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/pop_complete.dart';
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/widget/custom_button.dart';
+
 
 class PopupDialog {
   static void show(BuildContext context) {
@@ -29,7 +29,7 @@ class PopupDialog {
                       width: 10.w,
                       child: Image.asset(AppImages.check),
                     ),
-                    Icon(Icons.cancel_outlined),
+                    const Icon(Icons.cancel_outlined),
                   ],
                 ),
                 Text(
@@ -102,7 +102,7 @@ class PopupDialog {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomButton(text: "Edit",color: AppColors.grey,width: 32.w,onTap: () {
-                      AppCustomNavigator.replace(context, Quiz());
+                      AppCustomNavigator.replace(context, const Quiz());
                   },),
                   CustomButton(text: "Confirm",width: 32.w,onTap: () {
                     

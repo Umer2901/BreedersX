@@ -1,18 +1,22 @@
+import 'package:sizer/sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
+import 'package:provider/provider.dart';
+import 'package:breedex/view/Auth/login.dart';
+import 'package:breedex/constants/colors.dart';
+import 'package:breedex/view/home/new_herd.dart';
+import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/auth_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
-import 'package:breedex/view/home/new_herd.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:breedex/constants/colors.dart';
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/Auth/login.dart';
-import 'package:breedex/view/splash_screen.dart';
 import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/widget/textfield.dart';
-import 'package:sizer/sizer.dart';
+
+
+// ignore_for_file: use_build_context_synchronously
+
+
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -112,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onTap: () async {
                             if (_passwordController.text != _confirmPasswordController.text) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Passwords do not match')),
+                                const SnackBar(content: Text('Passwords do not match')),
                               );
                               return;
                             }
@@ -128,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               );
 
                               if (authProvider.user != null) {
-                                AppCustomNavigator.replace(context, NewHerd());
+                                AppCustomNavigator.replace(context, const NewHerd());
                               }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -140,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         if (loadingProvider.isLoading)
-                          CircularProgressIndicator(),
+                          const CircularProgressIndicator(),
                       ],
                     );
                   },
@@ -152,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: EdgeInsets.only(bottom: 2.h),
                     child: GestureDetector(
                       onTap: () {
-                        AppCustomNavigator.replace(context, LoginScreen());
+                        AppCustomNavigator.replace(context, const LoginScreen());
                       },
                       child: Text.rich(
                         TextSpan(
