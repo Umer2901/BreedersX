@@ -31,7 +31,11 @@ class _PasswordChangeState extends State<PasswordChange> {
               color: AppColors.grey,
               borderRadius: BorderRadius.circular(50,),
             ),
-            child: const Icon(Icons.arrow_back),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
           ),
         ),
       ),
@@ -54,8 +58,8 @@ class _PasswordChangeState extends State<PasswordChange> {
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                   Text(
-                    'Your password has been changed succesfully',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    'We send you a mail on your email.By using this you can change the password',
+                    style: Theme.of(context).textTheme.bodySmall,textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 4.h),
                  
