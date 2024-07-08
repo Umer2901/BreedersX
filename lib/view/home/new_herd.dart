@@ -1,14 +1,16 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/model/herd_model.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:breedex/services/herd_services.dart';
+import 'package:breedex/provider/herd_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/home/cow_scoring_entry.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+
 // ignore_for_file: use_build_context_synchronously
 
 class NewHerd extends StatefulWidget {
@@ -94,20 +96,38 @@ class _NewHerdState extends State<NewHerd> {
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 4.h),
-                  CustomButton(
-                    text: 'Next',
-                    onTap: () async {
-                      if (_formKey.currentState?.saveAndValidate() ?? false) {
-                        final herd = HerdModel(
-                            name: _formKey.currentState?.value['name'],
-                            location: _formKey.currentState?.value['Location'],
-                            headScore: _formKey.currentState?.value['head'],
-                            id: '3333');
-                        await HerdServices().addHerd(herd);
-                        AppCustomNavigator.push(context, const CowScoring());
-                      }
-                    },
-                  ),
+                  Consumer<HerdProvider>(
+                      builder: (context, herdProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Next',
+                          onTap: () async {
+                            if (_formKey.currentState?.saveAndValidate() ??
+                                false) {
+                              final herd = HerdModel(
+                                  name: _formKey.currentState?.value['name'],
+                                  location:
+                                      _formKey.currentState?.value['Location'],
+                                  headScore:
+                                      _formKey.currentState?.value['head'],
+                                  id: '3333');
+                              await herdProvider.addHerd(herd);
+                              if (!herdProvider.isLoading) {
+                                AppCustomNavigator.push(
+                                    context, const CowScoring());
+                              }
+                            }
+                          },
+                        ),
+                        if (herdProvider.isLoading)
+                          Padding(
+                            padding: EdgeInsets.only(top: 2.h),
+                            child: const CircularProgressIndicator(),
+                          ),
+                      ],
+                    );
+                  }),
                   SizedBox(height: 4.h),
                 ],
               ),
