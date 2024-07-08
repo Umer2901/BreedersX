@@ -1,6 +1,8 @@
 import 'dart:convert';
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
 class ScroringEntry {
@@ -9,13 +11,18 @@ class ScroringEntry {
   final String dam;
   final String sire;
   final String timeOfcalved;
+  final String scoringEntery;
+  final String id;
   ScroringEntry({
     required this.name,
     required this.dob,
     required this.dam,
     required this.sire,
     required this.timeOfcalved,
+    required this.scoringEntery,
+    required this.id,
   });
+  
 
   ScroringEntry copyWith({
     String? name,
@@ -23,6 +30,8 @@ class ScroringEntry {
     String? dam,
     String? sire,
     String? timeOfcalved,
+    String? scoringEntery,
+    String? id,
   }) {
     return ScroringEntry(
       name: name ?? this.name,
@@ -30,6 +39,8 @@ class ScroringEntry {
       dam: dam ?? this.dam,
       sire: sire ?? this.sire,
       timeOfcalved: timeOfcalved ?? this.timeOfcalved,
+      scoringEntery: scoringEntery ?? this.scoringEntery,
+      id: id ?? this.id,
     );
   }
 
@@ -40,6 +51,8 @@ class ScroringEntry {
       'dam': dam,
       'sire': sire,
       'timeOfcalved': timeOfcalved,
+      'scoringEntery': scoringEntery,
+      'id': id,
     };
   }
 
@@ -50,6 +63,19 @@ class ScroringEntry {
       dam: map['dam'] as String,
       sire: map['sire'] as String,
       timeOfcalved: map['timeOfcalved'] as String,
+      scoringEntery: map['scoringEntery'] as String,
+      id: map['id'] as String,
+    );
+  }
+  factory ScroringEntry.fromDoc(DocumentSnapshot snapshot) {
+    return ScroringEntry(
+      name: snapshot['name'] as String,
+      dob: snapshot['dob'] as String,
+      dam: snapshot['dam'] as String,
+      sire: snapshot['sire'] as String,
+      timeOfcalved: snapshot['timeOfcalved'] as String,
+      scoringEntery: snapshot['scoringEntery'] as String,
+      id: snapshot['id'] as String,
     );
   }
 
@@ -59,7 +85,7 @@ class ScroringEntry {
 
   @override
   String toString() {
-    return 'ScroringEntry(name: $name, dob: $dob, dam: $dam, sire: $sire, timeOfcalved: $timeOfcalved)';
+    return 'ScroringEntry(name: $name, dob: $dob, dam: $dam, sire: $sire, timeOfcalved: $timeOfcalved, scoringEntery: $scoringEntery, id: $id)';
   }
 
   @override
@@ -71,7 +97,9 @@ class ScroringEntry {
       other.dob == dob &&
       other.dam == dam &&
       other.sire == sire &&
-      other.timeOfcalved == timeOfcalved;
+      other.timeOfcalved == timeOfcalved &&
+      other.scoringEntery == scoringEntery &&
+      other.id == id;
   }
 
   @override
@@ -80,6 +108,8 @@ class ScroringEntry {
       dob.hashCode ^
       dam.hashCode ^
       sire.hashCode ^
-      timeOfcalved.hashCode;
+      timeOfcalved.hashCode ^
+      scoringEntery.hashCode ^
+      id.hashCode;
   }
-}
+  }
