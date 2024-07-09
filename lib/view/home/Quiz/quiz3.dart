@@ -2,7 +2,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
-import 'package:breedex/model/listitem_model.dart';
+import 'package:breedex/model/lists_models.dart';
 import 'package:breedex/view/home/Quiz/quiz4.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
@@ -166,7 +166,7 @@ class _Quiz3State extends State<Quiz3> {
                 CustomButton(
                   text: 'Next',
                   onTap: () {
-                    AppCustomNavigator.replace(context, const Quiz4());
+                    AppCustomNavigator.push(context, const Quiz4());
                   },
                 ),
                 SizedBox(height: 2.h),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/view/widget/popup1.dart';
-import 'package:breedex/model/listitem_model.dart';
+import 'package:breedex/model/lists_models.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';

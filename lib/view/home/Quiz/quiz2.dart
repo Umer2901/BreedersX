@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import '../../widget/custom_button.dart';
 import 'package:breedex/constants/colors.dart';
-import 'package:breedex/model/listitem_model.dart';
+import 'package:breedex/model/lists_models.dart';
 import 'package:breedex/view/home/Quiz/quiz3.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
+
 
 
 
@@ -33,6 +34,8 @@ class _Quiz2State extends State<Quiz2> {
     ListItem(text: 'Underline: Trim-free of extra skin', percentage: '5%'),
     ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%'),
   ];
+
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +173,7 @@ class _Quiz2State extends State<Quiz2> {
                 CustomButton(
                   text: 'Next',
                   onTap: () {
-                    AppCustomNavigator.replace(context, const Quiz3());
+                    AppCustomNavigator.push(context, const Quiz3());
                   },
                 ),
                 SizedBox(height: 2.h),
