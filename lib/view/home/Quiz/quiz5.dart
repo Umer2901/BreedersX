@@ -8,11 +8,6 @@ import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
 
-
-
-
-
-
 class Quiz5 extends StatefulWidget {
   const Quiz5({super.key});
 
@@ -22,14 +17,35 @@ class Quiz5 extends StatefulWidget {
 
 class _Quiz5State extends State<Quiz5> {
   int selectedOption = -1;
- final List<ListItem> items = [
-    ListItem(text: 'Udder Depth: Moderate depth relative to hock with adequate capacity and clearance. Consideration is given to lactation number and age', percentage: '20%'),
-    ListItem(text: 'Fore Udder: Firmly attached with moderate length and ample capacity', percentage: '15%'),
-    ListItem(text: 'Rear Udder: Wide and high, firmly attached with a unifrom width top to bottom and fullness at base of the rear udder where it turns to become the udder floor', percentage: '15%'),
-    ListItem(text: 'Teat Placement: squarely placed under each quarter, plumb and properly spaced from side and rear views', percentage: '15%'),
-    ListItem(text: 'Teats: Cyclindrical shape and uniform size with medium length and diameter', percentage: '15%'),
-    ListItem(text: 'Udder Cleft: Evidence of strong median suspensory liagment indicated by adequately definined halving ', percentage: '10%'),
-    ListItem(text: 'Udder Balance and Texture: Should exhibit an udder floor that is level as viewed from side. Quarters should be evenly balanced, soft pliable and well collapsed after milking', percentage: '10%'),
+  final List<ListItem> items = [
+    ListItem(
+        text:
+            'Udder Depth: Moderate depth relative to hock with adequate capacity and clearance. Consideration is given to lactation number and age',
+        percentage: '20%'),
+    ListItem(
+        text:
+            'Fore Udder: Firmly attached with moderate length and ample capacity',
+        percentage: '15%'),
+    ListItem(
+        text:
+            'Rear Udder: Wide and high, firmly attached with a unifrom width top to bottom and fullness at base of the rear udder where it turns to become the udder floor',
+        percentage: '15%'),
+    ListItem(
+        text:
+            'Teat Placement: squarely placed under each quarter, plumb and properly spaced from side and rear views',
+        percentage: '15%'),
+    ListItem(
+        text:
+            'Teats: Cyclindrical shape and uniform size with medium length and diameter',
+        percentage: '15%'),
+    ListItem(
+        text:
+            'Udder Cleft: Evidence of strong median suspensory liagment indicated by adequately definined halving ',
+        percentage: '10%'),
+    ListItem(
+        text:
+            'Udder Balance and Texture: Should exhibit an udder floor that is level as viewed from side. Quarters should be evenly balanced, soft pliable and well collapsed after milking',
+        percentage: '10%'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -37,9 +53,9 @@ class _Quiz5State extends State<Quiz5> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-         child: GestureDetector(
-            onTap: (){
-           AppCustomNavigator.pop(context);
+          child: GestureDetector(
+            onTap: () {
+              AppCustomNavigator.pop(context);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -77,11 +93,11 @@ class _Quiz5State extends State<Quiz5> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 SizedBox(height: 2.h),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                     '5-Mammary System',
+                      '5-Mammary System',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
@@ -90,26 +106,8 @@ class _Quiz5State extends State<Quiz5> {
                     ),
                   ],
                 ),
-                SizedBox(height: 3.h),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.grey,
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 0),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 1),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 2),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 3),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 4.h),
-                                Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: items.map((item) {
                     return Padding(
@@ -123,12 +121,14 @@ class _Quiz5State extends State<Quiz5> {
                               Flexible(
                                 child: Text(
                                   item.text,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                 ),
                               ),
                               Text(
                                 item.percentage,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                               ),
                             ],
                           ),
@@ -141,13 +141,14 @@ class _Quiz5State extends State<Quiz5> {
                             ),
                             width: double.infinity,
                             child: const Padding(
-                              padding:  EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: CustomTextField(
                                 enableBorder: false,
                                 name: 'Detail',
-                                hintText: 'Enter the details, Must be 1-50 words',
+                                hintText:
+                                    'Enter the details, Must be 1-50 words',
                                 fillColor: Colors.white,
-                                maxLines: 3, 
+                                maxLines: 3,
                                 minLines: 1,
                               ),
                             ),
@@ -157,14 +158,14 @@ class _Quiz5State extends State<Quiz5> {
                     );
                   }).toList(),
                 ),
-                 SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
                 Center(
                   child: Text(
-                        'Your Score is: 97',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                    'Your Score is: 97',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
-               SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
                 CustomButton(
                   text: 'Next',
                   onTap: () {
@@ -196,24 +197,21 @@ class _Quiz5State extends State<Quiz5> {
               width: 1,
             ),
           ),
-        
         ),
         child: ListTile(
           leading: selectedOption == index
               ? Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.green,
-                      width: 2,)
-                ),
-                child: const Icon(Icons.circle, color: AppColors.green))
-              : const Icon(Icons.radio_button_unchecked), 
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: AppColors.green,
+                        width: 2,
+                      )),
+                  child: const Icon(Icons.circle, color: AppColors.green))
+              : const Icon(Icons.radio_button_unchecked),
           title: Text(
             optionText,
-         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-          
-         ),
-          
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
           ),
         ),
       ),

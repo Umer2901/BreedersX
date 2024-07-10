@@ -95,26 +95,8 @@ class _Quiz2State extends State<Quiz2> {
                     ),
                   ],
                 ),
-                SizedBox(height: 3.h),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.grey,
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 0),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 1),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 2),
-                      buildOption('Lorem Ipsum is simply dummy text of the printing', 3),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 4.h),
-                                Column(
+                  Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: items.map((item) {
                     return Padding(
