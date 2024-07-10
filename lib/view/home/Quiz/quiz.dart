@@ -175,11 +175,11 @@ class _QuizState extends State<Quiz> {
                 ),
                 SizedBox(height: 2.h),
                 Center(
-                  child: Text(
-                    'Your Score is: ${quizProvider.quizData.score}',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
+  child: Text(
+    'Your Score is: ${quizProvider.quizData.score}%',
+    style: Theme.of(context).textTheme.headlineSmall,
+  ),
+),
                 SizedBox(height: 4.h),
                 Consumer<Quiz1Provider>(
                     builder: (context, quizProvider, child) {
