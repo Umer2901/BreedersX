@@ -7,8 +7,10 @@ class CowScoringEntryProvider with ChangeNotifier {
   final CowScoringEntryServices _scoringEntryServices =
       CowScoringEntryServices();
   bool _isLoading = false;
+  String? _id;
 
   bool get isLoading => _isLoading;
+  String? get id => _id;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -18,7 +20,8 @@ class CowScoringEntryProvider with ChangeNotifier {
   Future<void> addEntry(ScroringEntry score) async {
     setLoading(true);
     try {
-      await _scoringEntryServices.addEntry(score);
+      _id = await _scoringEntryServices.addEntry(score);
+      notifyListeners();
     } catch (e) {
       print('Error adding herd: $e');
     } finally {

@@ -8,9 +8,9 @@ import 'package:breedex/view/home/Quiz/quiz2.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/quize1_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
+import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
 // ignore_for_file: use_build_context_synchronously
-
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -20,7 +20,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-    final List<TextEditingController> _controllers =
+  final List<TextEditingController> _controllers =
       List.generate(7, (index) => TextEditingController());
 
   int selectedOption = -1;
@@ -46,6 +46,14 @@ class _QuizState extends State<Quiz> {
             'Size: The volumetric measurment of the capacity of the cow (LxWxH) is evaluated with age and breed recommendations taken into consdieration. Height at withers and hips should be realtively proportiate.',
         percentage: '25%'),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<Quiz1Provider>().setId(
+          context.read<CowScoringEntryProvider>().id!,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,40 +116,10 @@ class _QuizState extends State<Quiz> {
                   ],
                 ),
                 SizedBox(height: 2.h),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.grey,
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      buildOption(
-                          'Lorem Ipsum is simply dummy text of the printing',
-                          0,
-                          quizProvider),
-                      buildOption(
-                          'Lorem Ipsum is simply dummy text of the printing',
-                          1,
-                          quizProvider),
-                      buildOption(
-                          'Lorem Ipsum is simply dummy text of the printing',
-                          2,
-                          quizProvider),
-                      buildOption(
-                          'Lorem Ipsum is simply dummy text of the printing',
-                          3,
-                          quizProvider),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 2.h),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: items.asMap().entries.map((entry) {
-                     int index = entry.key;
+                    int index = entry.key;
                     ListItem item = entry.value;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -204,29 +182,26 @@ class _QuizState extends State<Quiz> {
                 ),
                 SizedBox(height: 4.h),
                 Consumer<Quiz1Provider>(
-                  builder: (context, quizProvider, child) {
-                    return Column(
-                      children: [
-                        CustomButton(
-                          text: 'Next',
-                          onTap: () async {
-                            await quizProvider.saveQuizData();
-                            if (!quizProvider.isLoading) {
+                    builder: (context, quizProvider, child) {
+                  return Column(
+                    children: [
+                      CustomButton(
+                        text: 'Next',
+                        onTap: () async {
+                          await quizProvider.saveQuizData();
+                          if (!quizProvider.isLoading) {
                             AppCustomNavigator.push(context, const Quiz2());
                           }
-                            
-                          },
-                        ),
-                        if (quizProvider.isLoading)
+                        },
+                      ),
+                      if (quizProvider.isLoading)
                         Padding(
                           padding: EdgeInsets.only(top: 2.h),
                           child: const CircularProgressIndicator(),
                         ),
-                      ],
-                    );
-                    
-                  }
-                ),
+                    ],
+                  );
+                }),
                 SizedBox(height: 2.h),
               ],
             ),
@@ -241,7 +216,6 @@ class _QuizState extends State<Quiz> {
       onTap: () {
         setState(() {
           selectedOption = index;
-          quizProvider.setOptionSelected(optionText);
         });
       },
       child: Container(

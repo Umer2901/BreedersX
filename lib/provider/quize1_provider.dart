@@ -4,8 +4,8 @@ import 'package:breedex/services/quize1_services.dart';
 
 
 class Quiz1Provider with ChangeNotifier {
- final  Quize1Model _quizData = Quize1Model(
-      optionSelected: '', details: List<String>.filled(7, ''), score: '0');
+ Quize1Model _quizData = Quize1Model(
+      id: '', details: List<String>.filled(7, ''), score: '0');
  final Quize1Services _quizService = Quize1Services();
 
   Quize1Model get quizData => _quizData;
@@ -13,16 +13,17 @@ class Quiz1Provider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  void setOptionSelected(String option) {
-    _quizData.optionSelected = option;
-    notifyListeners();
-  }
 
   void addDetail(int index, String detail) {
     if (index >= 0 && index < _quizData.details.length) {
       _quizData.details[index] = detail;
       notifyListeners();
     }
+  }
+
+  void setId(String id) {
+    _quizData = _quizData.copyWith(id: id);
+    notifyListeners();
   }
 
   void setScore(String score) {
