@@ -175,11 +175,11 @@ class _QuizState extends State<Quiz> {
                 ),
                 SizedBox(height: 2.h),
                 Center(
-  child: Text(
-    'Your Score is: ${quizProvider.quizData.score}%',
-    style: Theme.of(context).textTheme.headlineSmall,
-  ),
-),
+                  child: Text(
+                    'Your Score is: ${quizProvider.quizData.score}%',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
                 SizedBox(height: 4.h),
                 Consumer<Quiz1Provider>(
                     builder: (context, quizProvider, child) {
@@ -211,42 +211,4 @@ class _QuizState extends State<Quiz> {
     );
   }
 
-  Widget buildOption(String optionText, int index, Quiz1Provider quizProvider) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedOption = index;
-        });
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: AppColors.grey,
-              width: 1,
-            ),
-          ),
-        ),
-        child: ListTile(
-          leading: selectedOption == index
-              ? Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: AppColors.green,
-                      width: 2,
-                    ),
-                  ),
-                  child: const Icon(Icons.circle, color: AppColors.green),
-                )
-              : const Icon(Icons.radio_button_unchecked),
-          title: Text(
-            optionText,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-          ),
-        ),
-      ),
-    );
-  }
 }

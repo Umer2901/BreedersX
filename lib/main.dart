@@ -7,6 +7,8 @@ import 'package:breedex/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:breedex/provider/herd_provider.dart';
 import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/provider/quize3_provider.dart';
+import 'package:breedex/provider/quize2_provider.dart';
 import 'package:breedex/provider/quize1_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => HerdProvider()),
             ChangeNotifierProvider(create: (_) => CowScoringEntryProvider()),
             ChangeNotifierProvider(create: (_) => Quiz1Provider()),
+            ChangeNotifierProvider(create: (_) => Quiz2Provider()),
+            ChangeNotifierProvider(create: (_) => Quiz3Provider()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

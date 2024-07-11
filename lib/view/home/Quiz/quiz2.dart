@@ -1,12 +1,18 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
 import '../../widget/custom_button.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/model/lists_models.dart';
 import 'package:breedex/view/home/Quiz/quiz3.dart';
 import 'package:breedex/view/widget/textfield.dart';
+import 'package:breedex/provider/quize2_provider.dart';
+import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
+
+// ignore_for_file: use_build_context_synchronously
+
 
 
 
@@ -21,6 +27,8 @@ class Quiz2 extends StatefulWidget {
 }
 
 class _Quiz2State extends State<Quiz2> {
+  final List<TextEditingController> _controllers =
+      List.generate(10, (index) => TextEditingController());
   int selectedOption = -1;
  final List<ListItem> items = [
     ListItem(text: 'Ribs: Well sprung - not slab sided', percentage: '10%'),
@@ -35,9 +43,18 @@ class _Quiz2State extends State<Quiz2> {
     ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%'),
   ];
 
-   
+   @override
+  void initState() {
+    super.initState();
+    context.read<Quiz2Provider>().setId(
+          context.read<CowScoringEntryProvider>().id!,
+        );
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final quizProvider = Provider.of<Quiz2Provider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -98,7 +115,10 @@ class _Quiz2State extends State<Quiz2> {
                 SizedBox(height: 4.h),
                   Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: items.map((item) {
+                  children:  items.asMap().entries.map((entry) 
+                  {
+                    int index = entry.key;
+                    ListItem item = entry.value;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -127,8 +147,8 @@ class _Quiz2State extends State<Quiz2> {
                               border: Border.all(color: Colors.grey),
                             ),
                             width: double.infinity,
-                            child: const Padding(
-                              padding:  EdgeInsets.all(8.0),
+                            child:  Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
                                 enableBorder: false,
                                 name: 'Detail',
@@ -136,6 +156,10 @@ class _Quiz2State extends State<Quiz2> {
                                 fillColor: Colors.white,
                                 maxLines: 3, 
                                 minLines: 1,
+                                controller: _controllers[index],
+                                onChanged: (value) {
+                                  quizProvider.addDetail(index, value!);
+                                },
                               ),
                             ),
                           ),
@@ -152,12 +176,27 @@ class _Quiz2State extends State<Quiz2> {
                       ),
                 ),
                SizedBox(height: 2.h),
-                CustomButton(
-                  text: 'Next',
-                  onTap: () {
-                    AppCustomNavigator.push(context, const Quiz3());
-                  },
-                ),
+                Consumer<Quiz2Provider>(
+                    builder: (context, quizProvider, child) {
+                  return Column(
+                    children: [
+                      CustomButton(
+                        text: 'Next',
+                        onTap: () async {
+                          await quizProvider.saveQuiz2Data();
+                          if (!quizProvider.isLoading) {
+                            AppCustomNavigator.push(context, const Quiz3());
+                          }
+                        },
+                      ),
+                      if (quizProvider.isLoading)
+                        Padding(
+                          padding: EdgeInsets.only(top: 2.h),
+                          child: const CircularProgressIndicator(),
+                        ),
+                    ],
+                  );
+                }),
                 SizedBox(height: 2.h),
               ],
             ),
@@ -167,43 +206,5 @@ class _Quiz2State extends State<Quiz2> {
     );
   }
 
-  Widget buildOption(String optionText, int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedOption = index;
-        });
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: AppColors.grey,
-              width: 1,
-            ),
-          ),
-        
-        ),
-        child: ListTile(
-          leading: selectedOption == index
-              ? Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.green,
-                      width: 2,)
-                ),
-                child: const Icon(Icons.circle, color: AppColors.green))
-              : const Icon(Icons.radio_button_unchecked), 
-          title: Text(
-            optionText,
-         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-          
-         ),
-          
-          ),
-        ),
-      ),
-    );
-  }
+
 }
