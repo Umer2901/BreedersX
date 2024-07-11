@@ -50,14 +50,24 @@ class _QuizState extends State<Quiz> {
   @override
   void initState() {
     super.initState();
-    context.read<Quiz1Provider>().setId(
+    final quizProvider = context.read<Quiz1Provider>();
+    quizProvider.setBuilding(true);
+    quizProvider.setId(
           context.read<CowScoringEntryProvider>().id!,
         );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<Quiz1Provider>(context);
+    quizProvider.setBuilding(true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -210,5 +220,4 @@ class _QuizState extends State<Quiz> {
       ),
     );
   }
-
 }

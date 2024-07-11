@@ -36,17 +36,26 @@ class _Quiz3State extends State<Quiz3> {
     ListItem(text: 'Back: Should be straight and strong; the loin-broad, strong, and nearly level', percentage: '26%'),
   ];
 
-  @override
+    @override
   void initState() {
     super.initState();
-    context.read<Quiz3Provider>().setId(
+    final quizProvider = context.read<Quiz3Provider>();
+    quizProvider.setBuilding(true);
+    quizProvider.setId(
           context.read<CowScoringEntryProvider>().id!,
         );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<Quiz3Provider>(context);
+    quizProvider.setBuilding(true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
     return Scaffold(
       appBar: AppBar(
         leading: Padding(

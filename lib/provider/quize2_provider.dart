@@ -18,18 +18,29 @@ class Quiz2Provider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _isBuilding = false;
+  bool get isBuilding => _isBuilding;
+
+  void setBuilding(bool value) {
+    _isBuilding = value;
+  }
+
   void addDetail(int index, String detail) {
     if (index >= 0 && index < _quizData.details.length) {
       _quizData.details[index] = detail;
       _calculateScore();
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 
   void setId(String id) {
     if (_quizData.id != id) {
       _quizData = _quizData.copyWith(id: id);
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 
@@ -58,7 +69,9 @@ class Quiz2Provider with ChangeNotifier {
   void _setLoading(bool value) {
     if (_isLoading != value) {
       _isLoading = value;
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 }
