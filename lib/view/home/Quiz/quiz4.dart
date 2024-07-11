@@ -38,17 +38,26 @@ class _Quiz4State extends State<Quiz4> {
     ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%'),
   ];
 
-  @override
+   @override
   void initState() {
     super.initState();
-    context.read<Quiz4Provider>().setId(
+    final quizProvider = context.read<Quiz4Provider>();
+    quizProvider.setBuilding(true);
+    quizProvider.setId(
           context.read<CowScoringEntryProvider>().id!,
         );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<Quiz4Provider>(context);
+    quizProvider.setBuilding(true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -163,11 +172,11 @@ class _Quiz4State extends State<Quiz4> {
                   }).toList(),
                 ),
                  SizedBox(height: 2.h),
-                Center(
+               Center(
                   child: Text(
-                        'Your Score is: 97',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                    'Your Score is: ${quizProvider.quizData.score}%',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
                SizedBox(height: 2.h),
                 Consumer<Quiz4Provider>(
