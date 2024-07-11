@@ -160,11 +160,11 @@ class _Quiz3State extends State<Quiz3> {
                   }).toList(),
                 ),
                 SizedBox(height: 2.h),
-                Center(
+                    Center(
                   child: Text(
-                        'Your Score is: 97',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                    'Your Score is: ${quizProvider.quizData.score}%',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Consumer<Quiz3Provider>(

@@ -10,7 +10,7 @@ import 'package:breedex/services/quize3_services.dart';
 class Quiz3Provider with ChangeNotifier {
   Quize3Model _quizData = Quize3Model(
     details: List<String>.filled(4, ''),
-    percentages: [13, 13, 10, 7, 17, 15, 25],
+    percentages: [22, 26, 26, 26,],
     id: '',
     score: '0',
   );
