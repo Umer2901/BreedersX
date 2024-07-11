@@ -12,12 +12,6 @@ import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
 // ignore_for_file: use_build_context_synchronously
 
-
-
-
-
-
-
 class Quiz4 extends StatefulWidget {
   const Quiz4({super.key});
 
@@ -29,12 +23,25 @@ class _Quiz4State extends State<Quiz4> {
   final List<TextEditingController> _controllers =
       List.generate(6, (index) => TextEditingController());
   int selectedOption = -1;
- final List<ListItem> items = [
-    ListItem(text: 'Movement: Free and comfortable; able to rise and lie down easy', percentage: '35%'),
-    ListItem(text: 'Feet: Steep angle and deep heel with short, well rounded, closed toes', percentage: '20%'),
-    ListItem(text: 'Legs: Front and Rear: Tracking straight, wide apart with feet squarely placed. Hocks: Cleanly molded, free from coarseness and puffiness with adequate flexibility.', percentage: '10%'),
-    ListItem(text: 'Rear legs - Side View: A moderate set (angle) to the hock.', percentage: '10%'),
-    ListItem(text: 'Thurl Position: Centrally placed between hip bones and pin bones', percentage: '15%'),
+  final List<ListItem> items = [
+    ListItem(
+        text: 'Movement: Free and comfortable; able to rise and lie down easy',
+        percentage: '35%'),
+    ListItem(
+        text:
+            'Feet: Steep angle and deep heel with short, well rounded, closed toes',
+        percentage: '20%'),
+    ListItem(
+        text:
+            'Legs: Front and Rear: Tracking straight, wide apart with feet squarely placed. Hocks: Cleanly molded, free from coarseness and puffiness with adequate flexibility.',
+        percentage: '10%'),
+    ListItem(
+        text: 'Rear legs - Side View: A moderate set (angle) to the hock.',
+        percentage: '10%'),
+    ListItem(
+        text:
+            'Thurl Position: Centrally placed between hip bones and pin bones',
+        percentage: '15%'),
     ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%'),
   ];
 
@@ -53,9 +60,9 @@ class _Quiz4State extends State<Quiz4> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-         child: GestureDetector(
-            onTap: (){
-           AppCustomNavigator.pop(context);
+          child: GestureDetector(
+            onTap: () {
+              AppCustomNavigator.pop(context);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -93,11 +100,11 @@ class _Quiz4State extends State<Quiz4> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 SizedBox(height: 2.h),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                     '4-Mobility ',
+                      '4-Mobility ',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
@@ -106,9 +113,8 @@ class _Quiz4State extends State<Quiz4> {
                     ),
                   ],
                 ),
-                
                 SizedBox(height: 4.h),
-                                Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: items.asMap().entries.map((entry) {
                     int index = entry.key;
@@ -124,12 +130,14 @@ class _Quiz4State extends State<Quiz4> {
                               Flexible(
                                 child: Text(
                                   item.text,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                 ),
                               ),
                               Text(
                                 item.percentage,
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                               ),
                             ],
                           ),
@@ -141,14 +149,15 @@ class _Quiz4State extends State<Quiz4> {
                               border: Border.all(color: Colors.grey),
                             ),
                             width: double.infinity,
-                            child:  Padding(
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
                                 enableBorder: false,
                                 name: 'Detail',
-                                hintText: 'Enter the details, Must be 1-50 words',
+                                hintText:
+                                    'Enter the details, Must be 1-50 words',
                                 fillColor: Colors.white,
-                                maxLines: 3, 
+                                maxLines: 3,
                                 minLines: 1,
                                 controller: _controllers[index],
                                 onChanged: (value) {
@@ -162,14 +171,14 @@ class _Quiz4State extends State<Quiz4> {
                     );
                   }).toList(),
                 ),
-                 SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
                 Center(
                   child: Text(
-                        'Your Score is: 97',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                    'Your Score is: 97',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
-               SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
                 Consumer<Quiz4Provider>(
                     builder: (context, quizProvider, child) {
                   return Column(
@@ -199,5 +208,4 @@ class _Quiz4State extends State<Quiz4> {
       ),
     );
   }
-
- }
+}
