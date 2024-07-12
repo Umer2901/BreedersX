@@ -47,17 +47,25 @@ class _QuizState extends State<Quiz> {
         percentage: '25%'),
   ];
 
+  bool _isInit = true;
+
   @override
   void initState() {
     super.initState();
-    final quizProvider = context.read<Quiz1Provider>();
-    quizProvider.setBuilding(true);
-    quizProvider.setId(
-          context.read<CowScoringEntryProvider>().id!,
-        );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider.setBuilding(false);
-    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      final quizProvider = context.read<Quiz1Provider>();
+      quizProvider.setBuilding(true);
+      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        quizProvider.setBuilding(false);
+      });
+      _isInit = false;
+    }
   }
 
   @override

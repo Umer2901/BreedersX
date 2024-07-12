@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
-import 'package:breedex/view/widget/popup1.dart';
 import 'package:breedex/model/lists_models.dart';
 import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/quize5_provider.dart';
-import 'package:breedex/provider/quize4_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
+
+
 // ignore_for_file: use_build_context_synchronously
 
 
@@ -57,8 +57,8 @@ class _Quiz5State extends State<Quiz5> {
   ];
   
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     context.read<Quiz5Provider>().setId(
           context.read<CowScoringEntryProvider>().id!,
         );

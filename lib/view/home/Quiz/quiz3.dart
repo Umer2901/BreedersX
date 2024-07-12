@@ -36,17 +36,25 @@ class _Quiz3State extends State<Quiz3> {
     ListItem(text: 'Back: Should be straight and strong; the loin-broad, strong, and nearly level', percentage: '26%'),
   ];
 
-    @override
+  bool _isInit = true;
+
+  @override
   void initState() {
     super.initState();
-    final quizProvider = context.read<Quiz3Provider>();
-    quizProvider.setBuilding(true);
-    quizProvider.setId(
-          context.read<CowScoringEntryProvider>().id!,
-        );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider.setBuilding(false);
-    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      final quizProvider = context.read<Quiz3Provider>();
+      quizProvider.setBuilding(true);
+      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        quizProvider.setBuilding(false);
+      });
+      _isInit = false;
+    }
   }
 
   @override

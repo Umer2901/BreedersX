@@ -43,17 +43,25 @@ class _Quiz2State extends State<Quiz2> {
     ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%'),
   ];
 
-   @override
+ bool _isInit = true;
+
+  @override
   void initState() {
     super.initState();
-    final quizProvider = context.read<Quiz2Provider>();
-    quizProvider.setBuilding(true);
-    quizProvider.setId(
-          context.read<CowScoringEntryProvider>().id!,
-        );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider.setBuilding(false);
-    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      final quizProvider = context.read<Quiz2Provider>();
+      quizProvider.setBuilding(true);
+      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        quizProvider.setBuilding(false);
+      });
+      _isInit = false;
+    }
   }
 
   @override

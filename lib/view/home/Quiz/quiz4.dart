@@ -45,17 +45,25 @@ class _Quiz4State extends State<Quiz4> {
     ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%'),
   ];
 
-   @override
+   bool _isInit = true;
+
+  @override
   void initState() {
     super.initState();
-    final quizProvider = context.read<Quiz4Provider>();
-    quizProvider.setBuilding(true);
-    quizProvider.setId(
-          context.read<CowScoringEntryProvider>().id!,
-        );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider.setBuilding(false);
-    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInit) {
+      final quizProvider = context.read<Quiz4Provider>();
+      quizProvider.setBuilding(true);
+      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        quizProvider.setBuilding(false);
+      });
+      _isInit = false;
+    }
   }
 
   @override
