@@ -7,31 +7,43 @@ import 'package:breedex/services/quize5_services.dart';
 // ignore_for_file: avoid_print
 
 class Quiz5Provider with ChangeNotifier {
+  
   Quize5Model _quizData = Quize5Model(
     details: List<String>.filled(7, ''),
-    percentages: [13, 13, 10, 7, 17, 15, 25],
+    percentages: [20, 15, 15, 15, 15, 10, 10],
     id: '',
     score: '0',
   );
-  final Quize5Services _quizService = Quize5Services();
+ final Quize5Services _quizService = Quize5Services();
 
   Quize5Model get quizData => _quizData;
 
-  bool _isLoading = false;
+ bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  bool _isBuilding = false;
+  bool get isBuilding => _isBuilding;
+
+  void setBuilding(bool value) {
+    _isBuilding = value;
+  }
 
   void addDetail(int index, String detail) {
     if (index >= 0 && index < _quizData.details.length) {
       _quizData.details[index] = detail;
       _calculateScore();
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 
   void setId(String id) {
     if (_quizData.id != id) {
       _quizData = _quizData.copyWith(id: id);
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 
@@ -60,7 +72,9 @@ class Quiz5Provider with ChangeNotifier {
   void _setLoading(bool value) {
     if (_isLoading != value) {
       _isLoading = value;
-      notifyListeners();
+      if (!_isBuilding) {
+        notifyListeners();
+      }
     }
   }
 }

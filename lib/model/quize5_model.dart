@@ -1,18 +1,13 @@
 import 'dart:convert';
-import 'package:collection/collection.dart';
-// ignore_for_file: depend_on_referenced_packages
-
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-
-
-
+import 'package:flutter/foundation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Quize5Model {
   List<String> details;
   List<int> percentages;
   String id;
   String score;
+
   Quize5Model({
     required this.details,
     required this.percentages,
@@ -45,10 +40,20 @@ class Quize5Model {
 
   factory Quize5Model.fromMap(Map<String, dynamic> map) {
     return Quize5Model(
-      details: List<String>.from((map['details'] as List<String>)),
-      percentages: List<int>.from((map['percentages'] as List<int>)),
-      id: map['id'] as String,
-      score: map['score'] as String,
+      details: List<String>.from((map['details'] as List<dynamic>? ?? []).map((item) => item as String)),
+      percentages: List<int>.from((map['percentages'] as List<dynamic>? ?? []).map((item) => item as int)),
+      id: map['id'] as String? ?? '',
+      score: map['score'] as String? ?? '',
+    );
+  }
+
+  factory Quize5Model.fromDoc(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>? ?? {};
+    return Quize5Model(
+      details: List<String>.from((data['details'] as List<dynamic>? ?? []).map((item) => item as String)),
+      percentages: List<int>.from((data['percentages'] as List<dynamic>? ?? []).map((item) => item as int)),
+      id: data['id'] as String? ?? '',
+      score: data['score'] as String? ?? '',
     );
   }
 
@@ -57,27 +62,15 @@ class Quize5Model {
   factory Quize5Model.fromJson(String source) => Quize5Model.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'Quize5Model(details: $details, percentages: $percentages, id: $id, score: $score)';
-  }
+  String toString() => 'Quize5Model(details: $details, percentages: $percentages, id: $id, score: $score)';
 
   @override
   bool operator ==(covariant Quize5Model other) {
     if (identical(this, other)) return true;
-    final listEquals = const DeepCollectionEquality().equals;
-  
-    return 
-      listEquals(other.details, details) &&
-      listEquals(other.percentages, percentages) &&
-      other.id == id &&
-      other.score == score;
+
+    return listEquals(other.details, details) && listEquals(other.percentages, percentages) && other.id == id && other.score == score;
   }
 
   @override
-  int get hashCode {
-    return details.hashCode ^
-      percentages.hashCode ^
-      id.hashCode ^
-      score.hashCode;
-  }
+  int get hashCode => details.hashCode ^ percentages.hashCode ^ id.hashCode ^ score.hashCode;
 }

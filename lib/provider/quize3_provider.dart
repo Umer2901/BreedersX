@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:breedex/model/quize2_model.dart';
 import 'package:breedex/model/quize3_model.dart';
+import 'package:breedex/services/quize2_services.dart';
 import 'package:breedex/services/quize3_services.dart';
-
-
-
-
+import 'package:flutter/material.dart';
+import 'package:breedex/model/quize1_model.dart';
+import 'package:breedex/services/quize1_services.dart';
 // ignore_for_file: avoid_print
 
 class Quiz3Provider with ChangeNotifier {
@@ -78,3 +78,5 @@ class Quiz3Provider with ChangeNotifier {
     }
   }
 }
+
+ 

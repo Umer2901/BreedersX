@@ -1,3 +1,4 @@
+import 'package:breedex/view/widget/popup1.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,18 +56,28 @@ class _Quiz5State extends State<Quiz5> {
             'Udder Balance and Texture: Should exhibit an udder floor that is level as viewed from side. Quarters should be evenly balanced, soft pliable and well collapsed after milking',
         percentage: '10%'),
   ];
-  
+   bool _isInit = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<Quiz5Provider>().setId(
-          context.read<CowScoringEntryProvider>().id!,
-        );
+    if (_isInit) {
+      final quizProvider = context.read<Quiz5Provider>();
+      quizProvider.setBuilding(true);
+      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        quizProvider.setBuilding(false);
+      });
+      _isInit = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<Quiz5Provider>(context);
+    quizProvider.setBuilding(true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -183,9 +194,9 @@ class _Quiz5State extends State<Quiz5> {
                   }).toList(),
                 ),
                 SizedBox(height: 2.h),
-                Center(
+                 Center(
                   child: Text(
-                    'Your Score is: 97',
+                    'Your Score is: ${quizProvider.quizData.score}%',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
@@ -199,7 +210,8 @@ class _Quiz5State extends State<Quiz5> {
                         onTap: () async {
                           await quizProvider.saveQuiz5Data();
                           if (!quizProvider.isLoading) {
-                            AppCustomNavigator.push(context, const Quiz5());
+                            final cowId=context.read<CowScoringEntryProvider>().id!;
+                             PopupDialog.show(context,cowId);
                           }
                         },
                       ),

@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:breedex/model/quize2_model.dart';
 import 'package:breedex/services/quize2_services.dart';
-
+import 'package:flutter/material.dart';
+import 'package:breedex/model/quize1_model.dart';
+import 'package:breedex/services/quize1_services.dart';
 // ignore_for_file: avoid_print
 
 class Quiz2Provider with ChangeNotifier {
   Quize2Model _quizData = Quize2Model(
     details: List<String>.filled(10, ''),
-    percentages: [10, 15, 10, 10, 20, 10, 10,5,5,5],
+    percentages: [10, 15, 10, 10, 20, 10, 10, 5, 5, 5],
     id: '',
     score: '0',
   );
@@ -75,3 +76,5 @@ class Quiz2Provider with ChangeNotifier {
     }
   }
 }
+
+ 

@@ -1,14 +1,14 @@
+import 'package:breedex/navigator.dart';
+import 'package:breedex/view/home/new_herd.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
 
-
-
-
 class PopupDialogComplete {
-  static void show(BuildContext context) {
+  static void show(BuildContext context, String finalScore) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return FractionallySizedBox(
@@ -19,9 +19,14 @@ class PopupDialogComplete {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                  const Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(Icons.cancel_outlined)),
+                  GestureDetector
+                  (onTap: (){
+                    AppCustomNavigator.replace(context, NewHerd());
+                  },
+                    child: const Align(
+                      alignment: Alignment.topRight,
+                      child: Icon(Icons.cancel_outlined)),
+                  ),
                   SizedBox(
                       height: 12.h,
                       width: 12.w,
@@ -29,7 +34,7 @@ class PopupDialogComplete {
                     ),
               
                 Text(
-                  "Excellent 90+",
+                  "Excellent $finalScore",
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(),
                 ),
               ],
@@ -40,16 +45,16 @@ class PopupDialogComplete {
                   height: 2.h,
                 ),
                 Text(
-                  "Lorem Ipsum is simply dummy tex",
+                  "Lorem Ipsum is simply dummy text.",
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
-            
-            ],
+              ],
+            ),
           ),
-          )  );
+        );
       },
     );
   }
