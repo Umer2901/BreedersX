@@ -166,6 +166,7 @@ class _Quiz2State extends State<Quiz2> {
                             child:  Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
                                 enableBorder: false,
                                 name: 'Detail',
                                 hintText: 'Enter the details, Must be 1-50 words',

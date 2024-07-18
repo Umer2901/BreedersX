@@ -169,6 +169,7 @@ class _Quiz4State extends State<Quiz4> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
                                 enableBorder: false,
                                 name: 'Detail',
                                 hintText:

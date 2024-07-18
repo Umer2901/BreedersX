@@ -21,7 +21,7 @@ class PopupDialogComplete {
               children: [
                   GestureDetector
                   (onTap: (){
-                    AppCustomNavigator.replace(context, NewHerd());
+                    AppCustomNavigator.replace(context, const NewHerd());
                   },
                     child: const Align(
                       alignment: Alignment.topRight,
