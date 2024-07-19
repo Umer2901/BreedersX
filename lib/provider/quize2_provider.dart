@@ -1,6 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:breedex/model/quize2_model.dart';
 import 'package:breedex/services/quize2_services.dart';
+
 
 // ignore_for_file: avoid_print
 
@@ -45,12 +47,14 @@ class Quiz2Provider with ChangeNotifier {
   }
 
   void _calculateScore() {
-    int totalScore = 0;
+    double totalScore = 0.0;
     for (int i = 0; i < _quizData.details.length; i++) {
       if (_quizData.details[i].isNotEmpty) {
-        totalScore += _quizData.percentages[i];
+        totalScore += _quizData.percentages[i] *
+            (double.parse(_quizData.details[i]) / 100);
       }
     }
+    totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
     _quizData = _quizData.copyWith(score: totalScore.toString());
   }
 

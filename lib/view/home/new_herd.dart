@@ -76,10 +76,6 @@ class _NewHerdState extends State<NewHerd> {
                     hintText: 'Your Location',
                     fillColor: AppColors.white,
                     validator: FormBuilderValidators.required(),
-                    suffixIcon: const Icon(
-                      Icons.arrow_downward,
-                      color: AppColors.primary,
-                    ),
                   ),
                   SizedBox(height: 3.h),
                   Text(

@@ -1,18 +1,8 @@
 class ListItem {
   final String text;
   final String percentage;
+  final double weight;
 
-  ListItem({required this.text, required this.percentage});
+  ListItem({required this.text, required this.percentage, required this.weight});
 }
 
-// class QuizData {
-//   String optionSelected;
-//   List<String> details;
-//   int score;
-
-//   QuizData({
-//     required this.optionSelected,
-//     required this.details,
-//     required this.score,
-//   });
-// }

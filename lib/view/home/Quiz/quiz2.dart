@@ -29,18 +29,20 @@ class Quiz2 extends StatefulWidget {
 class _Quiz2State extends State<Quiz2> {
   final List<TextEditingController> _controllers =
       List.generate(10, (index) => TextEditingController());
+  final _formKey = GlobalKey<FormState>();
   int selectedOption = -1;
  final List<ListItem> items = [
-    ListItem(text: 'Ribs: Well sprung - not slab sided', percentage: '10%'),
-    ListItem(text: 'Disposition: Calm, easy demeanor', percentage: '15%'),
-    ListItem(text: 'Body Condition: Appropriate for the stage of lactation/environment', percentage: '10%'),
-    ListItem(text: 'Breed Characteristics: Overall style, strength, and balance. Head should be feminine', percentage: '10%'),
-    ListItem(text: 'Poll: Flat and upward V-shape', percentage: '20%'),
-    ListItem(text: 'Brisket: Clean & free of excess fleshiness', percentage: '10%'),
-    ListItem(text: 'Horns: Adequete length. Horn base tied in smoothly. No bulbous base or ballooned.', percentage: '10%'),
-    ListItem(text: 'Tail: Long and slender', percentage: '5%'),
-    ListItem(text: 'Underline: Trim-free of extra skin', percentage: '5%'),
-    ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%'),
+    ListItem(text: 'Ribs: Well sprung - not slab sided', percentage: '10%',
+        weight: 10.0),
+    ListItem(text: 'Disposition: Calm, easy demeanor', percentage: '15%',weight: 15.0),
+    ListItem(text: 'Body Condition: Appropriate for the stage of lactation/environment', percentage: '10%',weight: 10.0),
+    ListItem(text: 'Breed Characteristics: Overall style, strength, and balance. Head should be feminine', percentage: '10%',weight: 10.0),
+    ListItem(text: 'Poll: Flat and upward V-shape', percentage: '20%',weight: 20.0),
+    ListItem(text: 'Brisket: Clean & free of excess fleshiness', percentage: '10%',weight: 10.0),
+    ListItem(text: 'Horns: Adequete length. Horn base tied in smoothly. No bulbous base or ballooned.', percentage: '10%',weight: 10.0),
+    ListItem(text: 'Tail: Long and slender', percentage: '5%',weight: 5.0),
+    ListItem(text: 'Underline: Trim-free of extra skin', percentage: '5%',weight: 5.0),
+    ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%',weight: 5.0),
   ];
 
  bool _isInit = true;
@@ -62,6 +64,17 @@ class _Quiz2State extends State<Quiz2> {
       });
       _isInit = false;
     }
+  }
+
+  String? _validateInput(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a value';
+    }
+    final number = int.tryParse(value);
+    if (number == null || number < 1 || number > 50) {
+      return 'Please enter a number between 1 and 50';
+    }
+    return null;
   }
 
   @override
@@ -106,115 +119,122 @@ class _Quiz2State extends State<Quiz2> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 3.w),
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'How old are you?',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                SizedBox(height: 2.h),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                     '2-Breed Characteristics',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      '25%',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  items.asMap().entries.map((entry) 
-                  {
-                    int index = entry.key;
-                    ListItem item = entry.value;
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  item.text,
-                                style: Theme.of(context).textTheme.headlineSmall,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'How old are you?',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  SizedBox(height: 2.h),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                       '2-Breed Characteristics',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Text(
+                        '25%',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:  items.asMap().entries.map((entry) 
+                    {
+                      int index = entry.key;
+                      ListItem item = entry.value;
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    item.text,
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  ),
+                                ),
+                                Text(
+                                  item.percentage,
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              height: 20.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              width: double.infinity,
+                              child:  Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomTextField(
+                                  enableBorder: false,
+                                  name: 'Detail',
+                                  hintText: 'Your Number must be between 1-50',
+                                  fillColor: Colors.white,
+                                  maxLines: 3, 
+                                  minLines: 1,
+                                  keyboardType: TextInputType.number,
+                                  controller: _controllers[index],
+                                  onChanged: (value) {
+                                    quizProvider.addDetail(index, value!);
+                                  },
+                                  validator: _validateInput,
                                 ),
                               ),
-                              Text(
-                                item.percentage,
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            height: 20.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey),
                             ),
-                            width: double.infinity,
-                            child:  Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(
-                                enableBorder: false,
-                                name: 'Detail',
-                                hintText: 'Enter the details, Must be 1-50 words',
-                                fillColor: Colors.white,
-                                maxLines: 3, 
-                                minLines: 1,
-                                controller: _controllers[index],
-                                onChanged: (value) {
-                                  quizProvider.addDetail(index, value!);
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-                 SizedBox(height: 2.h),
-                    Center(
-                  child: Text(
-                    'Your Score is: ${quizProvider.quizData.score}%',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-               SizedBox(height: 2.h),
-                Consumer<Quiz2Provider>(
-                    builder: (context, quizProvider, child) {
-                  return Column(
-                    children: [
-                      CustomButton(
-                        text: 'Next',
-                        onTap: () async {
-                          await quizProvider.saveQuiz2Data();
-                          if (!quizProvider.isLoading) {
-                            AppCustomNavigator.push(context, const Quiz3());
-                          }
-                        },
-                      ),
-                      if (quizProvider.isLoading)
-                        Padding(
-                          padding: EdgeInsets.only(top: 2.h),
-                          child: const CircularProgressIndicator(),
+                          ],
                         ),
-                    ],
-                  );
-                }),
-                SizedBox(height: 2.h),
-              ],
+                      );
+                    }).toList(),
+                  ),
+                   SizedBox(height: 2.h),
+                      Center(
+                    child: Text(
+                      'Your Score is: ${quizProvider.quizData.score}%',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                 SizedBox(height: 2.h),
+                  Consumer<Quiz2Provider>(
+                      builder: (context, quizProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Next',
+                          onTap: () async {
+                           if (_formKey.currentState!.validate()) {
+                              await quizProvider.saveQuiz2Data();
+                              if (!quizProvider.isLoading) {
+                                AppCustomNavigator.push(context, const Quiz3());
+                              }
+                            }
+                          },
+                        ),
+                        if (quizProvider.isLoading)
+                          Padding(
+                            padding: EdgeInsets.only(top: 2.h),
+                            child: const CircularProgressIndicator(),
+                          ),
+                      ],
+                    );
+                  }),
+                  SizedBox(height: 2.h),
+                ],
+              ),
             ),
           ),
         ),
