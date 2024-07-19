@@ -1,16 +1,18 @@
-import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
 import 'package:breedex/view/home/Quiz/quiz.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:breedex/view/widget/pop_complete.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/model/scoring_entery_model.dart';
+// ignore_for_file: avoid_print
+
+
+
+
 
 class PopupDialog {
   static void show(BuildContext context, String cowId) {
