@@ -1,9 +1,9 @@
-import 'package:breedex/navigator.dart';
-import 'package:breedex/view/home/new_herd.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
+import 'package:breedex/view/home/new_herd.dart';
 
 class PopupDialogComplete {
   static void show(BuildContext context, String finalScore) {

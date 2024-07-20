@@ -22,27 +22,29 @@ class Quiz4 extends StatefulWidget {
 class _Quiz4State extends State<Quiz4> {
   final List<TextEditingController> _controllers =
       List.generate(6, (index) => TextEditingController());
+  final _formKey = GlobalKey<FormState>();
   int selectedOption = -1;
   final List<ListItem> items = [
     ListItem(
         text: 'Movement: Free and comfortable; able to rise and lie down easy',
-        percentage: '35%'),
+        percentage: '35%',weight: 35.0),
     ListItem(
         text:
             'Feet: Steep angle and deep heel with short, well rounded, closed toes',
-        percentage: '20%'),
+        percentage: '20%',weight: 20.0),
     ListItem(
         text:
             'Legs: Front and Rear: Tracking straight, wide apart with feet squarely placed. Hocks: Cleanly molded, free from coarseness and puffiness with adequate flexibility.',
-        percentage: '10%'),
+        percentage: '10%',weight: 10.0),
     ListItem(
         text: 'Rear legs - Side View: A moderate set (angle) to the hock.',
-        percentage: '10%'),
+        percentage: '10%',weight: 10.0),
     ListItem(
         text:
             'Thurl Position: Centrally placed between hip bones and pin bones',
-        percentage: '15%'),
-    ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%'),
+        percentage: '15%',weight: 15.0),
+    ListItem(text: 'Pasterns: Short, strong, flexible', percentage: '10%',
+        weight: 10.0),
   ];
 
    bool _isInit = true;
@@ -64,6 +66,17 @@ class _Quiz4State extends State<Quiz4> {
       });
       _isInit = false;
     }
+  }
+
+  String? _validateInput(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a value';
+    }
+    final number = int.tryParse(value);
+    if (number == null || number < 1 || number > 50) {
+      return 'Please enter a number between 1 and 50';
+    }
+    return null;
   }
 
   @override
@@ -108,118 +121,124 @@ class _Quiz4State extends State<Quiz4> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 3.w),
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'What are your goals?',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                SizedBox(height: 2.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '4-Mobility ',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      '20%',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: items.asMap().entries.map((entry) {
-                    int index = entry.key;
-                    ListItem item = entry.value;
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  item.text,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'What are your goals?',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  SizedBox(height: 2.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '4-Mobility ',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Text(
+                        '20%',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: items.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      ListItem item = entry.value;
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    item.text,
+                                    style:
+                                        Theme.of(context).textTheme.headlineSmall,
+                                  ),
+                                ),
+                                Text(
+                                  item.percentage,
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 ),
-                              ),
-                              Text(
-                                item.percentage,
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            height: 20.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey),
+                              ],
                             ),
-                            width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(
-                                keyboardType: TextInputType.number,
-                                enableBorder: false,
-                                name: 'Detail',
-                                hintText:
-                                    'Enter the details, Must be 1-50 words',
-                                fillColor: Colors.white,
-                                maxLines: 3,
-                                minLines: 1,
-                                controller: _controllers[index],
-                                onChanged: (value) {
-                                  quizProvider.addDetail(index, value!);
-                                },
+                            const SizedBox(height: 8),
+                            Container(
+                              height: 20.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomTextField(
+                                  enableBorder: false,
+                                  name: 'Detail',
+                                  hintText:
+                                      'Your Number must be between 1-50',
+                                  fillColor: Colors.white,
+                                  maxLines: 3,
+                                  minLines: 1,
+                                  keyboardType: TextInputType.number,
+                                  controller: _controllers[index],
+                                  onChanged: (value) {
+                                    quizProvider.addDetail(index, value!);
+                                  },
+                                  validator: _validateInput,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-                 SizedBox(height: 2.h),
-               Center(
-                  child: Text(
-                    'Your Score is: ${quizProvider.quizData.score}%',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-                SizedBox(height: 2.h),
-                Consumer<Quiz4Provider>(
-                    builder: (context, quizProvider, child) {
-                  return Column(
-                    children: [
-                      CustomButton(
-                        text: 'Next',
-                        onTap: () async {
-                          await quizProvider.saveQuiz4Data();
-                          if (!quizProvider.isLoading) {
-                            AppCustomNavigator.push(context, const Quiz5());
-                          }
-                        },
-                      ),
-                      if (quizProvider.isLoading)
-                        Padding(
-                          padding: EdgeInsets.only(top: 2.h),
-                          child: const CircularProgressIndicator(),
+                          ],
                         ),
-                    ],
-                  );
-                }),
-                SizedBox(height: 2.h),
-              ],
+                      );
+                    }).toList(),
+                  ),
+                   SizedBox(height: 2.h),
+                 Center(
+                    child: Text(
+                      'Your Score is: ${quizProvider.quizData.score}%',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                  SizedBox(height: 2.h),
+                  Consumer<Quiz4Provider>(
+                      builder: (context, quizProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Next',
+                          onTap: () async {
+                             if (_formKey.currentState!.validate()) {
+                              await quizProvider.saveQuiz4Data();
+                              if (!quizProvider.isLoading) {
+                                AppCustomNavigator.push(context, const Quiz5());
+                              }
+                             }
+                          },
+                        ),
+                        if (quizProvider.isLoading)
+                          Padding(
+                            padding: EdgeInsets.only(top: 2.h),
+                            child: const CircularProgressIndicator(),
+                          ),
+                      ],
+                    );
+                  }),
+                  SizedBox(height: 2.h),
+                ],
+              ),
             ),
           ),
         ),
