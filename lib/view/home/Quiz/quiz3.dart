@@ -177,7 +177,7 @@ class _Quiz3State extends State<Quiz3> {
                                 child: CustomTextField(
                                   enableBorder: false,
                                   name: 'Detail',
-                                  hintText: 'Your Number must be between 1-50',
+                                  hintText: '',
                                   fillColor: Colors.white,
                                   maxLines: 3, 
                                   minLines: 1,

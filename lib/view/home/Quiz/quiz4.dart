@@ -187,7 +187,7 @@ class _Quiz4State extends State<Quiz4> {
                                   enableBorder: false,
                                   name: 'Detail',
                                   hintText:
-                                      'Your Number must be between 1-50',
+                                      '',
                                   fillColor: Colors.white,
                                   maxLines: 3,
                                   minLines: 1,

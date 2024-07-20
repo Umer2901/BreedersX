@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:breedex/model/scoring_entery_model.dart';
 import 'package:breedex/services/scoring_entry_services.dart';
-// ignore_for_file: avoid_print
 
 class CowScoringEntryProvider with ChangeNotifier {
-  final CowScoringEntryServices _scoringEntryServices =
-      CowScoringEntryServices();
+  final CowScoringEntryServices _scoringEntryServices = CowScoringEntryServices();
   bool _isLoading = false;
   String? _id;
 
@@ -17,13 +15,14 @@ class CowScoringEntryProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addEntry(ScroringEntry score) async {
+  Future<void> addEntry(ScoringEntry score, String herdId) async {
     setLoading(true);
     try {
-      _id = await _scoringEntryServices.addEntry(score);
+      var entryWithHerdId = score.copyWith(herdId: herdId);
+      _id = await _scoringEntryServices.addEntry(entryWithHerdId);
       notifyListeners();
     } catch (e) {
-      print('Error adding herd: $e');
+      print('Error adding entry: $e');
     } finally {
       setLoading(false);
     }

@@ -10,8 +10,17 @@ class HerdServices {
         await _herdCollection.doc(value.id).update({'id': value.id});
       });
     } catch (e) {
-      // ignore: avoid_print
       print('Error adding herd: $e');
+    }
+  }
+
+  Future<List<HerdModel>> fetchHerds() async {
+    try {
+      final snapshot = await _herdCollection.get();
+      return snapshot.docs.map((doc) => HerdModel.fromDoc(doc)).toList();
+    } catch (e) {
+      print('Error fetching herds: $e');
+      return [];
     }
   }
 }

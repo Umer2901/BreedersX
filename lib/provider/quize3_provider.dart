@@ -1,4 +1,5 @@
-import 'package:breedex/model/quize2_model.dart';
+import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:breedex/model/quize3_model.dart';
 import 'package:breedex/services/quize3_services.dart';
 

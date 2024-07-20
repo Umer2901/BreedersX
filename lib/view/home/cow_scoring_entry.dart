@@ -9,10 +9,10 @@ import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/model/scoring_entery_model.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
+import 'package:breedex/provider/herd_provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 // ignore_for_file: use_build_context_synchronously
-
 
 class CowScoring extends StatefulWidget {
   const CowScoring({super.key});
@@ -42,6 +42,10 @@ class _CowScoringState extends State<CowScoring> {
             ),
           )
         : TextEditingController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HerdProvider>(context, listen: false).fetchHerds();
+    });
   }
 
   @override
@@ -52,16 +56,23 @@ class _CowScoringState extends State<CowScoring> {
 
   @override
   Widget build(BuildContext context) {
+    final herdProvider = Provider.of<HerdProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(50),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: const Icon(Icons.arrow_back),
             ),
-            child: const Icon(Icons.arrow_back),
           ),
         ),
         title: Text(
@@ -177,7 +188,6 @@ class _CowScoringState extends State<CowScoring> {
                             });
                           },
                           child: Container(
-                            //width: 50,
                             height: 35.sp,
                             margin: EdgeInsets.symmetric(horizontal: 3.sp),
                             decoration: BoxDecoration(
@@ -218,18 +228,22 @@ class _CowScoringState extends State<CowScoring> {
                           onTap: () async {
                             if (_formKey.currentState?.saveAndValidate() ??
                                 false) {
-                              final entry = ScroringEntry(
+                              if (herdProvider.herds.isNotEmpty) {
+                                final herdId = herdProvider.herds.first.id; // Assuming you want to use the first herd's id
+                                final entry = ScoringEntry(
                                   name: _formKey.currentState?.value['name'],
                                   dob: dateController!.text,
                                   dam: _formKey.currentState?.value['Dam'],
                                   sire: _formKey.currentState?.value['Sire'],
-                                  timeOfcalved: _formKey
-                                      .currentState?.value['timeCalved'],
-                                  scoringEntery: options[selectedIndex],
-                                  id: '');
-                              await scoringEntryProvider.addEntry(entry);
-                              if (!scoringEntryProvider.isLoading) {
-                                AppCustomNavigator.push(context, const Quiz());
+                                  timeOfCalved: _formKey.currentState?.value['timeCalved'],
+                                  scoringEntry: options[selectedIndex],
+                                  id: '',
+                                  herdId: herdId,
+                                );
+                                await scoringEntryProvider.addEntry(entry, herdId);
+                                if (!scoringEntryProvider.isLoading) {
+                                  AppCustomNavigator.push(context, const Quiz());
+                                }
                               }
                             }
                           },
