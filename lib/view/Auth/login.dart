@@ -1,3 +1,4 @@
+import 'package:breedex/view/home.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
 
                               if (authProvider.user != null) {
-                                AppCustomNavigator.replace(context, const NewHerd());
+                                AppCustomNavigator.replace(context, const HomePage());
                               }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
