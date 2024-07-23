@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, use_super_parameters, use_build_context_synchronously
+
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -234,7 +236,7 @@ class _CowScoringState extends State<CowScoring> {
                                 timeOfCalved: _formKey.currentState?.value['timeCalved'],
                                 scoringEntry: options[selectedIndex],
                                 id: '',
-                                herdId: widget.herdId, finalScore: '0',
+                                herdId: widget.herdId, finalScore: '',
                               );
                               await scoringEntryProvider.addEntry(entry, widget.herdId);
                               if (!scoringEntryProvider.isLoading) {

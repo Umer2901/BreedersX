@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:breedex/constants/images.dart';
 import 'package:breedex/provider/auth_provider.dart';
 import 'package:breedex/view/Auth/login.dart';

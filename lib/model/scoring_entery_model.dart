@@ -7,7 +7,7 @@ class ScoringEntry {
   final String sire;
   final String timeOfCalved;
   final String scoringEntry;
-  final String finalScore; // New field
+  final String finalScore;
   final String id;
   final String herdId;
 
@@ -18,7 +18,7 @@ class ScoringEntry {
     required this.sire,
     required this.timeOfCalved,
     required this.scoringEntry,
-    required this.finalScore, // New field
+    required this.finalScore,
     required this.id,
     required this.herdId,
   });
@@ -30,7 +30,7 @@ class ScoringEntry {
     String? sire,
     String? timeOfCalved,
     String? scoringEntry,
-    String? finalScore, // New field
+    String? finalScore, 
     String? id,
     String? herdId,
   }) {
@@ -41,7 +41,7 @@ class ScoringEntry {
       sire: sire ?? this.sire,
       timeOfCalved: timeOfCalved ?? this.timeOfCalved,
       scoringEntry: scoringEntry ?? this.scoringEntry,
-      finalScore: finalScore ?? this.finalScore, // New field
+      finalScore: finalScore ?? this.finalScore, 
       id: id ?? this.id,
       herdId: herdId ?? this.herdId,
     );
@@ -55,7 +55,7 @@ class ScoringEntry {
       'sire': sire,
       'timeOfCalved': timeOfCalved,
       'scoringEntry': scoringEntry,
-      'finalScore': finalScore, // New field
+      'finalScore': finalScore, 
       'id': id,
       'herdId': herdId,
     };
@@ -69,7 +69,7 @@ class ScoringEntry {
       sire: map['sire'] as String,
       timeOfCalved: map['timeOfCalved'] as String,
       scoringEntry: map['scoringEntry'] as String,
-      finalScore: map['finalScore'] as String, // New field
+      finalScore: map['finalScore'] as String,
       id: map['id'] as String,
       herdId: map['herdId'] as String,
     );
@@ -84,7 +84,7 @@ class ScoringEntry {
       sire: data['sire'] as String,
       timeOfCalved: data['timeOfCalved'] as String,
       scoringEntry: data['scoringEntry'] as String,
-      finalScore: data['finalScore'] as String, // New field
+      finalScore: data['finalScore'] as String,
       id: snapshot.id,
       herdId: data['herdId'] as String,
     );
@@ -105,7 +105,7 @@ class ScoringEntry {
         other.sire == sire &&
         other.timeOfCalved == timeOfCalved &&
         other.scoringEntry == scoringEntry &&
-        other.finalScore == finalScore && // New field
+        other.finalScore == finalScore && 
         other.id == id &&
         other.herdId == herdId;
   }
@@ -118,7 +118,7 @@ class ScoringEntry {
         sire.hashCode ^
         timeOfCalved.hashCode ^
         scoringEntry.hashCode ^
-        finalScore.hashCode ^ // New field
+        finalScore.hashCode ^ 
         id.hashCode ^
         herdId.hashCode;
   }

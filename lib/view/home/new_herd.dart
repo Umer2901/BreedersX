@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:breedex/view/home.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,14 +30,19 @@ class _NewHerdState extends State<NewHerd> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(
-                50,
+          child: GestureDetector(
+            onTap: () {
+              AppCustomNavigator.replace(context, HomePage());
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(
+                  50,
+                ),
               ),
+              child: const Icon(Icons.arrow_back),
             ),
-            child: const Icon(Icons.arrow_back),
           ),
         ),
         centerTitle: true,
