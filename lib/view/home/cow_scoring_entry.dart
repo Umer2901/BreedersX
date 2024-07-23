@@ -12,10 +12,11 @@ import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/provider/herd_provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-// ignore_for_file: use_build_context_synchronously
 
 class CowScoring extends StatefulWidget {
-  const CowScoring({super.key});
+  final String herdId;
+
+  const CowScoring({required this.herdId, Key? key}) : super(key: key);
 
   @override
   State<CowScoring> createState() => _CowScoringState();
@@ -37,9 +38,7 @@ class _CowScoringState extends State<CowScoring> {
     super.initState();
     dateController = _date != null
         ? TextEditingController(
-            text: DateFormat('MMMM dd, yyyy').format(
-              _date!,
-            ),
+            text: DateFormat('MMMM dd, yyyy').format(_date!),
           )
         : TextEditingController();
 
@@ -226,24 +225,20 @@ class _CowScoringState extends State<CowScoring> {
                         CustomButton(
                           text: 'Submit',
                           onTap: () async {
-                            if (_formKey.currentState?.saveAndValidate() ??
-                                false) {
-                              if (herdProvider.herds.isNotEmpty) {
-                                final herdId = herdProvider.herds.first.id; // Assuming you want to use the first herd's id
-                                final entry = ScoringEntry(
-                                  name: _formKey.currentState?.value['name'],
-                                  dob: dateController!.text,
-                                  dam: _formKey.currentState?.value['Dam'],
-                                  sire: _formKey.currentState?.value['Sire'],
-                                  timeOfCalved: _formKey.currentState?.value['timeCalved'],
-                                  scoringEntry: options[selectedIndex],
-                                  id: '',
-                                  herdId: herdId,
-                                );
-                                await scoringEntryProvider.addEntry(entry, herdId);
-                                if (!scoringEntryProvider.isLoading) {
-                                  AppCustomNavigator.push(context, const Quiz());
-                                }
+                            if (_formKey.currentState?.saveAndValidate() ?? false) {
+                              final entry = ScoringEntry(
+                                name: _formKey.currentState?.value['name'],
+                                dob: dateController!.text,
+                                dam: _formKey.currentState?.value['Dam'],
+                                sire: _formKey.currentState?.value['Sire'],
+                                timeOfCalved: _formKey.currentState?.value['timeCalved'],
+                                scoringEntry: options[selectedIndex],
+                                id: '',
+                                herdId: widget.herdId, finalScore: '0',
+                              );
+                              await scoringEntryProvider.addEntry(entry, widget.herdId);
+                              if (!scoringEntryProvider.isLoading) {
+                                AppCustomNavigator.push(context, const Quiz());
                               }
                             }
                           },

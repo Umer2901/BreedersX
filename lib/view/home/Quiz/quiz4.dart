@@ -37,7 +37,7 @@ class _Quiz4State extends State<Quiz4> {
             'Legs: Front and Rear: Tracking straight, wide apart with feet squarely placed. Hocks: Cleanly molded, free from coarseness and puffiness with adequate flexibility.',
         percentage: '10%',weight: 10.0),
     ListItem(
-        text: 'Rear legs - Side View: A moderate set (angle) to the hock.',
+        text: 'Rear legs - Side View: A moderate set (angle) to the hock. (Ideal +/-25)',
         percentage: '10%',weight: 10.0),
     ListItem(
         text:
@@ -127,21 +127,16 @@ class _Quiz4State extends State<Quiz4> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'What are your goals?',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '4-Mobility ',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '20%',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),

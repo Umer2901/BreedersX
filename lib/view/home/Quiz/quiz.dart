@@ -129,21 +129,16 @@ class _QuizState extends State<Quiz> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Tell us about yourself?',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '1-Strength & Substance',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                       style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '20%',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),

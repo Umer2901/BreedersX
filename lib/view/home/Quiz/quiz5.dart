@@ -132,21 +132,16 @@ class _Quiz5State extends State<Quiz5> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Physical activity level?',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '5-Mammary System',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '20%',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),

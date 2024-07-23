@@ -1,3 +1,4 @@
+import 'package:breedex/view/home.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
@@ -21,7 +22,7 @@ class PopupDialogComplete {
               children: [
                   GestureDetector
                   (onTap: (){
-                    AppCustomNavigator.replace(context, const NewHerd());
+                    AppCustomNavigator.replace(context, const HomePage());
                   },
                     child: const Align(
                       alignment: Alignment.topRight,

@@ -125,21 +125,16 @@ class _Quiz2State extends State<Quiz2> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'How old are you?',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  SizedBox(height: 2.h),
                    Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                        '2-Breed Characteristics',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                       style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '25%',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),

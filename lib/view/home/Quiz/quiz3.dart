@@ -31,7 +31,7 @@ class _Quiz3State extends State<Quiz3> {
   int selectedOption = -1;
   
   final List<ListItem> items = [
-    ListItem(text: 'Rump: Tail head is set slightly above and neatly between pin bones, and the tail is free from coarseness', percentage: '22%',weight: 22.0),
+    ListItem(text: 'Pins should be adequately spaced and slightly lower (2 inches) then hip bones; rump should be long with thurls of proportionate width. (Ideal +/-25)', percentage: '22%',weight: 22.0),
     ListItem(text: 'Rump: Pins should be adequately spaced and slightly lower (2 inches) then hip bones; rump should be long with thurls of proportionate width.', percentage: '26%',
         weight: 26.0),
     ListItem(text: 'Vulva: Is nearly vertical and the anus should not be recessed', percentage: '26%',
@@ -120,21 +120,16 @@ class _Quiz3State extends State<Quiz3> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'What is your weight?',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '3-Rump',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                       style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '15%',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                       style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),

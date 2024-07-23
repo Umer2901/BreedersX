@@ -1,19 +1,14 @@
 import 'package:breedex/constants/images.dart';
+import 'package:breedex/provider/auth_provider.dart';
+import 'package:breedex/view/Auth/login.dart';
 import 'package:breedex/view/herd_detail.dart';
-import 'package:flutter/widgets.dart';
+import 'package:breedex/view/home/new_herd.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
-import 'package:breedex/model/herd_model.dart';
 import 'package:breedex/constants/colors.dart';
-import 'package:breedex/view/widget/textfield.dart';
 import 'package:breedex/provider/herd_provider.dart';
-import 'package:breedex/view/widget/custom_button.dart';
-import 'package:breedex/view/home/cow_scoring_entry.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-// ignore_for_file: use_build_context_synchronously
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,20 +18,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HerdProvider>(context, listen: false).fetchHerds();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(50),
-
+          child: GestureDetector(
+            onTap: () async {
+              await Provider.of<AuthProvider>(context, listen: false).signOut(context);
+              AppCustomNavigator.replace(context, const LoginScreen()); 
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Image.asset(AppImages.power, color: AppColors.black),
             ),
-            child: Image.asset(AppImages.power,color: AppColors.black,)
           ),
         ),
         centerTitle: true,
@@ -46,77 +53,92 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 20.h,
-            width: 10.w,
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(50),
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                AppCustomNavigator.replace(context, NewHerd());
+              },
+              child: Container(
+                height: 20.h,
+                width: 10.w,
+                decoration: BoxDecoration(
+                  color: AppColors.grey,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Image.asset(AppImages.add, color: AppColors.black),
+              ),
             ),
-            child: Image.asset(AppImages.add,color: AppColors.black,)
           ),
-        ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'All Herd',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              SizedBox(
-                          height: 2.h,
-                        ),
-              Container(
-                height: 900.h, 
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                        color: AppColors.grey
+      body: Consumer<HerdProvider>(
+        builder: (context, herdProvider, child) {
+          if (herdProvider.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'All Herd',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Container(
+                    height: 90.h,
+                    child: ListView.builder(
+                      itemCount: herdProvider.herds.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final herd = herdProvider.herds[index];
+                        return Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: AppColors.grey,
+                                ),
+                              ),
+                              child: ListTile(
+                                onTap: () {
+                                  AppCustomNavigator.push(
+                                      context, HerdDeatilPage(herd: herd));
+                                },
+                                trailing: Text(
+                                  '${herd.headScore} Heads',
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                title: Text(
+                                  herd.name,
+                                  style:
+                                      Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                subtitle: Text(
+                                  '${herd.location} Cows',
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
                             ),
-                            
-                          ),
-                          child: ListTile(
-                           onTap: (){
-                            AppCustomNavigator.push(context, HerdDeatilPage());
-                           },
-                            trailing: Text(
-                                    '130 Heads',
-                                    style: Theme.of(context).textTheme.bodyMedium,
-                                  ) ,
-                            title: Text(
-                                    'Ranch Name',
-                                    style: Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  subtitle: Text(
-                                    'Your Location Here',
-                                    style: Theme.of(context).textTheme.bodyMedium,
-                                  ) ,
-                          ),
-                          
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        )
-                      ],
-                    );
-                  },
-                ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

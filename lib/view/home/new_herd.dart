@@ -107,11 +107,13 @@ class _NewHerdState extends State<NewHerd> {
                                   headScore:
                                       _formKey.currentState?.value['head'],
                                   id: '3333');
-                              await herdProvider.addHerd(herd);
-                              if (!herdProvider.isLoading) {
-                                AppCustomNavigator.push(
-                                    context, const CowScoring());
-                              }
+                            final herdId = await herdProvider.addHerd(herd);
+                                if (herdId != null && !herdProvider.isLoading) {
+                                  AppCustomNavigator.push(
+                                    context,
+                                    CowScoring(herdId: herdId), // Use the retrieved herdId here
+                                  );
+                                }
                             }
                           },
                         ),
