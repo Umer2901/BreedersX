@@ -1,5 +1,4 @@
-// ignore_for_file: avoid_print
-
+import 'package:breedex/view/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ import 'package:breedex/model/scoring_entery_model.dart';
 class PopupDialog {
   static void show(BuildContext context, String cowId) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return FutureBuilder<DocumentSnapshot>(
@@ -31,7 +31,7 @@ class PopupDialog {
                   CustomButton(
                     text: "Close",
                     onTap: () {
-                      Navigator.of(context).pop();
+                     AppCustomNavigator.replace(context, const HomePage());
                     },
                   ),
                 ],
@@ -45,7 +45,7 @@ class PopupDialog {
             final quiz4Score = data?['quiz4Score'] != null ? double.parse(data!['quiz4Score']) : 0;
             final quiz5Score = data?['quiz5Score'] != null ? double.parse(data!['quiz5Score']) : 0;
             final finalScore = (quiz1Score * 0.2 + quiz2Score * 0.25 + quiz3Score * 0.15 + quiz4Score * 0.20 + quiz5Score * 0.20).toStringAsFixed(1);
-            final scoringEntryId = data?['id'] as String?; 
+            final scoringEntryId = data?['id'] as String?;
 
             if (scoringEntryId == null) {
               return AlertDialog(
@@ -61,6 +61,7 @@ class PopupDialog {
                 ],
               );
             }
+
             return FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance.collection('Cow Scoring').doc(scoringEntryId).get(),
               builder: (context, scoringEntrySnapshot) {
@@ -93,8 +94,11 @@ class PopupDialog {
                   print("Failed to update final score: $error");
                 });
 
+                
+                final finalScoreInt = (double.tryParse(finalScore) ?? 0).toInt();
+
                 return FractionallySizedBox(
-                  heightFactor: 0.60, 
+                  heightFactor: 0.60,
                   child: AlertDialog(
                     backgroundColor: AppColors.white,
                     title: Column(
@@ -109,7 +113,12 @@ class PopupDialog {
                               width: 10.w,
                               child: Image.asset(AppImages.check),
                             ),
-                            const Icon(Icons.cancel_outlined),
+                            IconButton(
+                              icon: const Icon(Icons.cancel_outlined),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
                           ],
                         ),
                         Text(
@@ -118,65 +127,140 @@ class PopupDialog {
                         ),
                       ],
                     ),
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 2.h),
-                        // Text(
-                        //   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                        //   style: Theme.of(context).textTheme.bodySmall!.copyWith(),
-                        // ),
-                         SizedBox(height: 2.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Subcategory Total",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                            ),
-                            Text(
-                              finalScore,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 2.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Final Score",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                            ),
-                            Text(
-                              finalScore,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 2.h),
-                      Row(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    Text(
-      "Category Name: ",
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-    ),
-    Expanded(
-      child: Text(
-        scoringEntry.scoringEntry,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-        overflow: TextOverflow.ellipsis, 
-        softWrap: true,
-      ),
-    ),
-  ],
-),
-
+                    content: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                         
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Category Name: ",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  scoringEntry.scoringEntry,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2.h),
                         
-                      ],
+                           Container(
+                            width: double.infinity,
+                             child: ExpansionTile(
+                              trailing: SizedBox.shrink(),
+                              tilePadding: EdgeInsets.zero, 
+                             childrenPadding: EdgeInsets.zero, 
+                              title:   Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Subcategory Total:",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                      Icon(Icons.arrow_drop_down),
+                                  ],
+                                ),
+                       
+                              ],
+                                                       ),
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Strength & Substance",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                    Text(
+                                      quiz1Score.toStringAsFixed(1),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Breed Characteristics ",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                    Text(
+                                      quiz2Score.toStringAsFixed(1),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Rump",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                    Text(
+                                      quiz3Score.toStringAsFixed(1),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Mobility ",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                    Text(
+                                      quiz4Score.toStringAsFixed(1),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Mammary System",
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                    Text(
+                                      quiz5Score.toStringAsFixed(1),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 2.h),
+                              ],
+                                                       ),
+                           ),
+                        
+                          SizedBox(height: 2.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Final Score",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                              ),
+                              Text(
+                                finalScore,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2.h),
+                        ],
+                      ),
                     ),
-                    
                     actions: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,14 +270,19 @@ class PopupDialog {
                             color: AppColors.grey,
                             width: 32.w,
                             onTap: () {
-                              AppCustomNavigator.replace(context, const Quiz());
+                             AppCustomNavigator.pop(context);
+                             AppCustomNavigator.pop(context);
+                             AppCustomNavigator.pop(context);
+                             AppCustomNavigator.pop(context);
+                             AppCustomNavigator.pop(context);
+                             AppCustomNavigator.pop(context);
                             },
                           ),
                           CustomButton(
                             text: "Confirm",
                             width: 32.w,
                             onTap: () {
-                           PopupDialogComplete.show(context, finalScore);
+                              PopupDialogComplete.show(context, finalScoreInt);
                             },
                           ),
                         ],

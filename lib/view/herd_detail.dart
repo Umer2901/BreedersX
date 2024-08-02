@@ -92,7 +92,7 @@ class _HerdDeatilPageState extends State<HerdDeatilPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'All Cow Scoring',
+                      'All Cows',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     SizedBox(
@@ -115,15 +115,16 @@ class _HerdDeatilPageState extends State<HerdDeatilPage> {
                                   data: ThemeData().copyWith(dividerColor: Colors.transparent),
                                   child: ExpansionTile(
                                     trailing: Text(
-                                      entry.scoringEntry,
+                                      "${entry.scoringEntry}",
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                     title: Text(
-                                      entry.name,
+                                     "Name: ${entry.name}",
                                       style: Theme.of(context).textTheme.bodyLarge,
                                     ),
                                     subtitle: Text(
-                                      entry.dam,
+                                       "Dob: ${entry.dob}",
+                                     
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                     children: [
@@ -134,25 +135,26 @@ class _HerdDeatilPageState extends State<HerdDeatilPage> {
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Text(
-                                                  entry.dob,
+                                                 Text(
+                                               "Sire: ${entry.sire}",
                                                   style: Theme.of(context).textTheme.bodyMedium,
                                                 ),
                                                 Text(
-                                                  entry.sire,
+                                                  "Dam: ${entry.dam}",
                                                   style: Theme.of(context).textTheme.bodyMedium,
                                                 ),
+                                               
                                               ],
                                             ),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
-                                                  entry.finalScore,
+                                                 "Final Score: ${entry.finalScore}",
                                                   style: Theme.of(context).textTheme.bodyMedium,
                                                 ),
                                                 Text(
-                                                  entry.timeOfCalved,
+                                                 "Time of Calved: ${entry.timeOfCalved}",
                                                   style: Theme.of(context).textTheme.bodyMedium,
                                                 ),
                                               ],

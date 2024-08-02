@@ -31,8 +31,8 @@ class _Quiz3State extends State<Quiz3> {
   int selectedOption = -1;
   
   final List<ListItem> items = [
-    ListItem(text: 'Pins should be adequately spaced and slightly lower (2 inches) then hip bones; rump should be long with thurls of proportionate width. (Ideal +/-25)', percentage: '22%',weight: 22.0),
-    ListItem(text: 'Rump: Pins should be adequately spaced and slightly lower (2 inches) then hip bones; rump should be long with thurls of proportionate width.', percentage: '26%',
+    ListItem(text: 'Rump: Tail head is set slightly above and neatly between pin bones, and the tail is free from coarseness', percentage: '22%',weight: 22.0),
+    ListItem(text: 'Rump: Pins should be adequately spaced and slightly lower (2 inches) then hip bones; rump should be long with thurls of proportionate width.(Ideal +/-25)', percentage: '26%',
         weight: 26.0),
     ListItem(text: 'Vulva: Is nearly vertical and the anus should not be recessed', percentage: '26%',
         weight: 26.0),

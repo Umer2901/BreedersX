@@ -123,19 +123,7 @@ class _CowScoringState extends State<CowScoring> {
                     validator: FormBuilderValidators.required(),
                   ),
                   SizedBox(height: 3.h),
-                  Text(
-                    'Dam',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  CustomTextField(
-                    enableBorder: true,
-                    name: 'Dam',
-                    hintText: 'Dam',
-                    fillColor: AppColors.white,
-                    validator: FormBuilderValidators.required(),
-                  ),
-                  SizedBox(height: 3.h),
-                  Text(
+                    Text(
                     'Sire',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -143,6 +131,19 @@ class _CowScoringState extends State<CowScoring> {
                     enableBorder: true,
                     name: 'Sire',
                     hintText: 'Sire',
+                    fillColor: AppColors.white,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                 
+                  SizedBox(height: 3.h),
+                 Text(
+                    'Dam',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  CustomTextField(
+                    enableBorder: true,
+                    name: 'Dam',
+                    hintText: 'Dam',
                     fillColor: AppColors.white,
                     validator: FormBuilderValidators.required(),
                   ),
@@ -159,23 +160,23 @@ class _CowScoringState extends State<CowScoring> {
                     validator: FormBuilderValidators.required(),
                     keyboardType: TextInputType.number,
                   ),
-                  SizedBox(height: 2.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Scoring Entry',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      Text(
-                        'See all',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: AppColors.primary),
-                      ),
-                    ],
-                  ),
+               //   SizedBox(height: 2.h),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Scoring Entry',
+                  //       style: Theme.of(context).textTheme.headlineLarge,
+                  //     ),
+                  //     Text(
+                  //       'See all',
+                  //       style: Theme.of(context)
+                  //           .textTheme
+                  //           .bodyMedium!
+                  //           .copyWith(color: AppColors.primary),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 4.h),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,

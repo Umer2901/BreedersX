@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'All Herd',
+                    'All Herds',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   SizedBox(
@@ -112,17 +112,17 @@ class _HomePageState extends State<HomePage> {
                                       context, HerdDeatilPage(herd: herd));
                                 },
                                 trailing: Text(
-                                  '${herd.headScore} Heads',
+                                  '${herd.headScore} Head',
                                   style:
                                       Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 title: Text(
-                                  herd.name,
+                                  "Ranch: ${herd.name}",
                                   style:
                                       Theme.of(context).textTheme.bodyLarge,
                                 ),
                                 subtitle: Text(
-                                  '${herd.location} Cows',
+                                  'Location: ${herd.location}',
                                   style:
                                       Theme.of(context).textTheme.bodyMedium,
                                 ),
