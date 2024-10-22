@@ -12,4 +12,5 @@ class AppImages {
   static const power = "assets/images/power.png";
   static const add = "assets/images/add.png";
   static const horn2 = "assets/images/horn2.jpg";
+  static const breedex = "assets/images/breedex.jpeg";
 }
