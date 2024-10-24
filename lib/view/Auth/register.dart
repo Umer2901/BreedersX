@@ -50,6 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _emailController,
                   enableBorder: true,
                   name: 'email',
+                  keyboardType: TextInputType.emailAddress,
                   hintText: 'Your email',
                   fillColor: AppColors.white,
                 ),

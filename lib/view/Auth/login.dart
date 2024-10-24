@@ -48,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 CustomTextField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',
