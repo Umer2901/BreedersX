@@ -23,4 +23,23 @@ class Quize1Services {
       print('Error updating cow scoring: $e');
     }
   }
+
+  Future<Quize1Model?> getQuizeDataByCowId(String cowId) async {
+  try {
+    QuerySnapshot querySnapshot = await _quize1Collection.where('id', isEqualTo: cowId).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return Quize1Model.fromDoc(querySnapshot.docs.first);
+      
+    } else {
+      print('No data found for cowId: $cowId');
+      return null;
+    }
+  } catch (e) {
+    print('Error fetching quiz data for cowId $cowId: $e');
+    return null;
+  }
+}
+
+
+
 }

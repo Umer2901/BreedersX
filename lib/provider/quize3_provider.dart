@@ -14,6 +14,7 @@ class Quiz3Provider with ChangeNotifier {
     percentages: [22, 26, 26, 26,],
     id: '',
     score: '0',
+    is_complete: false,
   );
   final Quize3Services _quizService = Quize3Services();
 
@@ -24,6 +25,7 @@ class Quiz3Provider with ChangeNotifier {
 
   bool _isBuilding = false;
   bool get isBuilding => _isBuilding;
+  
 
   void setBuilding(bool value) {
     _isBuilding = value;
@@ -74,6 +76,7 @@ class Quiz3Provider with ChangeNotifier {
 
     try {
       await _quizService.addQuize3Data(_quizData);
+        _quizData = _quizData.copyWith(is_complete: true);
     } catch (e) {
       print('Error saving quiz data: $e');
     } finally {

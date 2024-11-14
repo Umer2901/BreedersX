@@ -105,6 +105,18 @@ class _CowScoringState extends State<CowScoring> {
                     validator: FormBuilderValidators.required(),
                   ),
                   SizedBox(height: 3.h),
+                    Text(
+                    'Cow Id',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                    CustomTextField(
+                    enableBorder: true,
+                    name: 'cowid',
+                    hintText: 'Cow Id',
+                    fillColor: AppColors.white,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                  SizedBox(height: 3.h),
                   Text(
                     'Date of Birth',
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -177,49 +189,50 @@ class _CowScoringState extends State<CowScoring> {
                   //     ),
                   //   ],
                   // ),
-                  SizedBox(height: 4.h),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(options.length, (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
-                          },
-                          child: Container(
-                            height: 35.sp,
-                            margin: EdgeInsets.symmetric(horizontal: 3.sp),
-                            decoration: BoxDecoration(
-                              color: index == selectedIndex
-                                  ? AppColors.primary
-                                  : AppColors.white,
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(
-                                color: AppColors.black,
-                                width: 1,
-                              ),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(8.sp),
-                                child: Text(
-                                  options[index],
-                                  style: TextStyle(
-                                    color: index == selectedIndex
-                                        ? AppColors.white
-                                        : AppColors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
+                  // SizedBox(height: 4.h),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //     children: List.generate(options.length, (index) {
+                  //       return GestureDetector(
+                  //         onTap: () {
+                  //           setState(() {
+                  //             selectedIndex = index;
+                  //           });
+                  //         },
+                  //         child: Container(
+                  //           height: 35.sp,
+                  //           margin: EdgeInsets.symmetric(horizontal: 3.sp),
+                  //           decoration: BoxDecoration(
+                  //             color: index == selectedIndex
+                  //                 ? AppColors.primary
+                  //                 : AppColors.white,
+                  //             borderRadius: BorderRadius.circular(25),
+                  //             border: Border.all(
+                  //               color: AppColors.black,
+                  //               width: 1,
+                  //             ),
+                  //           ),
+                  //           child: Center(
+                  //             child: Padding(
+                  //               padding: EdgeInsets.all(8.sp),
+                  //               child: Text(
+                  //                 options[index],
+                  //                 style: TextStyle(
+                  //                   color: index == selectedIndex
+                  //                       ? AppColors.white
+                  //                       : AppColors.black,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       );
+                  //     }),
+                  //   ),
+                  // ),
+                
                   SizedBox(height: 4.h),
                   Consumer<CowScoringEntryProvider>(
                       builder: (context, scoringEntryProvider, child) {
@@ -231,6 +244,7 @@ class _CowScoringState extends State<CowScoring> {
                             if (_formKey.currentState?.saveAndValidate() ?? false) {
                               final entry = ScoringEntry(
                                 name: _formKey.currentState?.value['name'],
+                                cowid: _formKey.currentState?.value['cowid'],
                                 dob: dateController!.text,
                                 dam: _formKey.currentState?.value['Dam'],
                                 sire: _formKey.currentState?.value['Sire'],
@@ -241,7 +255,7 @@ class _CowScoringState extends State<CowScoring> {
                               );
                               await scoringEntryProvider.addEntry(entry, widget.herdId);
                               if (!scoringEntryProvider.isLoading) {
-                                AppCustomNavigator.push(context, const Quiz());
+                                AppCustomNavigator.push(context, const Quiz(isComplete: false));
                               }
                             }
                           },

@@ -10,6 +10,7 @@ class Quiz1Provider with ChangeNotifier {
     percentages: [13, 13, 10, 7, 17, 15, 25],
     id: '',
     score: '0',
+    is_complete: false,
   );
   final Quize1Services _quizService = Quize1Services();
 
@@ -17,7 +18,6 @@ class Quiz1Provider with ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-
   bool _isBuilding = false;
   bool get isBuilding => _isBuilding;
 
@@ -44,23 +44,27 @@ class Quiz1Provider with ChangeNotifier {
     }
   }
 
-  void _calculateScore() {
-    double totalScore = 0.0;
-    for (int i = 0; i < _quizData.details.length; i++) {
-      if (_quizData.details[i].isNotEmpty) {
-        totalScore += _quizData.percentages[i] *
-            (double.parse(_quizData.details[i]) / 100);
-      }
+ void _calculateScore() {
+  double weightedSum = 0.0;
+
+  for (int i = 0; i < _quizData.details.length; i++) {
+    if (_quizData.details[i].isNotEmpty) {
+      double detailValue = double.parse(_quizData.details[i]);
+      weightedSum += detailValue * (_quizData.percentages[i] / 100);
     }
-    totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
-    _quizData = _quizData.copyWith(score: totalScore.toString());
   }
+
+  double scaledScore = weightedSum * ((97 - 65) / 50) + 65;
+  double boundedScore = min(max(scaledScore, 65), 97);
+  _quizData = _quizData.copyWith(score: boundedScore.toString());
+}
 
   Future<void> saveQuizData() async {
     _setLoading(true);
 
     try {
       await _quizService.addQuize1Data(_quizData);
+        _quizData = _quizData.copyWith(is_complete: true);
     } catch (e) {
       print('Error saving quiz data: $e');
     } finally {
@@ -76,4 +80,6 @@ class Quiz1Provider with ChangeNotifier {
       }
     }
   }
+  
+
 }

@@ -115,7 +115,7 @@ class _HerdDeatilPageState extends State<HerdDeatilPage> {
                                   data: ThemeData().copyWith(dividerColor: Colors.transparent),
                                   child: ExpansionTile(
                                     trailing: Text(
-                                      "${entry.scoringEntry}",
+                                      "Cow Id: ${entry.cowid}",
                                       style: Theme.of(context).textTheme.bodyMedium,
                                     ),
                                     title: Text(

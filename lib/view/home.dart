@@ -78,66 +78,63 @@ class _HomePageState extends State<HomePage> {
           if (herdProvider.isLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'All Herds',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Container(
-                    height: 90.h,
-                    child: ListView.builder(
-                      itemCount: herdProvider.herds.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final herd = herdProvider.herds[index];
-                        return Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: AppColors.grey,
-                                ),
-                              ),
-                              child: ListTile(
-                                onTap: () {
-                                  AppCustomNavigator.push(
-                                      context, HerdDeatilPage(herd: herd));
-                                },
-                                trailing: Text(
-                                  '${herd.headScore} Head',
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                title: Text(
-                                  "Ranch: ${herd.name}",
-                                  style:
-                                      Theme.of(context).textTheme.bodyLarge,
-                                ),
-                                subtitle: Text(
-                                  'Location: ${herd.location}',
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium,
-                                ),
+          return Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'All Herds',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: herdProvider.herds.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final herd = herdProvider.herds[index];
+                      return Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: AppColors.grey,
                               ),
                             ),
-                            SizedBox(
-                              height: 2.h,
+                            child: ListTile(
+                              onTap: () {
+                                AppCustomNavigator.push(
+                                    context, HerdDeatilPage(herd: herd));
+                              },
+                              trailing: Text(
+                                '${herd.headScore} Head',
+                                style:
+                                    Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              title: Text(
+                                "Ranch: ${herd.name}",
+                                style:
+                                    Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              subtitle: Text(
+                                'Location: ${herd.location}',
+                                style:
+                                    Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ),
-                          ],
-                        );
-                      },
-                    ),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },

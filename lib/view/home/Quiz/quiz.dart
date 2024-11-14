@@ -1,3 +1,4 @@
+import 'package:breedex/view/widget/popup1.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +11,10 @@ import 'package:breedex/provider/quize1_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
-// ignore_for_file: use_build_context_synchronously
 
 class Quiz extends StatefulWidget {
-  const Quiz({super.key});
+    final bool isComplete;
+  const Quiz({super.key, required this.isComplete});
 
   @override
   State<Quiz> createState() => _QuizState();
@@ -24,36 +25,17 @@ class _QuizState extends State<Quiz> {
       List.generate(7, (index) => TextEditingController());
   final _formKey = GlobalKey<FormState>();
 
-  int selectedOption = -1;
-
   final List<ListItem> items = [
-    ListItem(
-        text: 'Chest: Adequete width and spacing between front legs',
-        percentage: '13%', weight: 13.0,),
-    ListItem(
-        text:
-            'Heart Girth: Deep and with well sprung fore ribs blending into shoulders',
-        percentage: '13%', weight: 13.0,),
-    ListItem(text: 'Bone Mass: Strong without coarseness', percentage: '10%', weight: 10.0,),
-    ListItem(
-        text: 'Muzzle: Broad with large open nostrils and a strong jaw',
-        percentage: '7%', weight: 7.0,),
-    ListItem(
-        text: 'Shoulder Blades and Elbows: Firmly set against the chest wall',
-        percentage: '17%',weight: 17.0),
-    ListItem(text: 'Crops: Full', percentage: '15%', weight: 15.0 ),
-    ListItem(
-        text:
-            'Size: The volumetric measurment of the capacity of the cow (LxWxH) is evaluated with age and breed recommendations taken into consdieration. Height at withers and hips should be realtively proportiate.',
-        percentage: '25%', weight: 25.0),
+    ListItem(text: 'Chest: Adequate width and spacing between front legs', percentage: '13%', weight: 13.0),
+    ListItem(text: 'Heart Girth: Deep and well-sprung fore ribs blending into shoulders', percentage: '13%', weight: 13.0),
+    ListItem(text: 'Bone Mass: Strong without coarseness', percentage: '10%', weight: 10.0),
+    ListItem(text: 'Muzzle: Broad with large open nostrils and a strong jaw', percentage: '7%', weight: 7.0),
+    ListItem(text: 'Shoulder Blades and Elbows: Firmly set against the chest wall', percentage: '17%', weight: 17.0),
+    ListItem(text: 'Crops: Full', percentage: '15%', weight: 15.0),
+    ListItem(text: 'Size: Volumetric measurement of the cow’s capacity', percentage: '25%', weight: 25.0),
   ];
 
   bool _isInit = true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
@@ -83,10 +65,6 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<Quiz1Provider>(context);
-    quizProvider.setBuilding(true);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      quizProvider.setBuilding(false);
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -134,11 +112,11 @@ class _QuizState extends State<Quiz> {
                     children: [
                       Text(
                         '1-Strength & Substance',
-                       style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         '20%',
-                         style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),
@@ -159,14 +137,12 @@ class _QuizState extends State<Quiz> {
                                 Flexible(
                                   child: Text(
                                     item.text,
-                                    style:
-                                        Theme.of(context).textTheme.headlineSmall,
+                                    style: Theme.of(context).textTheme.headlineSmall,
                                   ),
                                 ),
                                 Text(
                                   item.percentage,
-                                  style:
-                                      Theme.of(context).textTheme.headlineSmall,
+                                  style: Theme.of(context).textTheme.headlineSmall,
                                 ),
                               ],
                             ),
@@ -183,8 +159,7 @@ class _QuizState extends State<Quiz> {
                                 child: CustomTextField(
                                   enableBorder: false,
                                   name: 'Detail',
-                                  hintText:
-                                      '',
+                                  hintText: '',
                                   fillColor: Colors.white,
                                   maxLines: 3,
                                   minLines: 1,
@@ -210,17 +185,22 @@ class _QuizState extends State<Quiz> {
                     ),
                   ),
                   SizedBox(height: 4.h),
-                  Consumer<Quiz1Provider>(
-                      builder: (context, quizProvider, child) {
+                  Consumer<Quiz1Provider>(builder: (context, quizProvider, child) {
                     return Column(
                       children: [
                         CustomButton(
                           text: 'Next',
                           onTap: () async {
-                           if (_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               await quizProvider.saveQuizData();
                               if (!quizProvider.isLoading) {
-                                AppCustomNavigator.push(context, const Quiz2());
+                                 if (widget.isComplete) {
+                        final cowId = context.read<CowScoringEntryProvider>().id!;
+                       PopupDialog.show(context, cowId);
+        } else {
+          AppCustomNavigator.push(context, const Quiz2(isComplete: false));
+        }
+                              //  AppCustomNavigator.push(context, const Quiz2());
                               }
                             }
                           },

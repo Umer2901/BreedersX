@@ -16,7 +16,9 @@ import 'package:breedex/view/widget/custom_progress_bar.dart';
 
 
 class Quiz5 extends StatefulWidget {
-  const Quiz5({super.key});
+  final bool isComplete;
+  const Quiz5({super.key, required this.isComplete});
+  
 
   @override
   State<Quiz5> createState() => _Quiz5State();

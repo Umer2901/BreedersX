@@ -1,5 +1,6 @@
-import 'package:sizer/sizer.dart';
+import 'package:breedex/view/home.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ import 'package:breedex/provider/quize2_provider.dart';
 import 'package:breedex/provider/quize1_provider.dart';
 import 'package:breedex/provider/splash_provider.dart';
 import 'package:breedex/provider/scoring_entry_provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,7 +85,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
               useMaterial3: true,
             ),
-            home: const SplashScreen(),
+            home: HomePage(),
           ));
     });
   }

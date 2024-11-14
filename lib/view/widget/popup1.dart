@@ -1,4 +1,8 @@
 import 'package:breedex/view/home.dart';
+import 'package:breedex/view/home/Quiz/quiz2.dart';
+import 'package:breedex/view/home/Quiz/quiz3.dart';
+import 'package:breedex/view/home/Quiz/quiz4.dart';
+import 'package:breedex/view/home/Quiz/quiz5.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -173,70 +177,96 @@ class PopupDialog {
                               ],
                                                        ),
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Strength & Substance",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                    Text(
-                                      quiz1Score.toStringAsFixed(1),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                  ],
+                                
+                                GestureDetector(
+                                  onTap: (){
+                                    AppCustomNavigator.replace(context, Quiz(isComplete: true));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Strength & Substance",
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                      Text(
+                                        quiz1Score.toStringAsFixed(1),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Breed Characteristics ",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                    Text(
-                                      quiz2Score.toStringAsFixed(1),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                  ],
+                                  GestureDetector(
+                                  onTap: (){
+                                    AppCustomNavigator.replace(context, Quiz2(isComplete: true));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Breed Characteristics ",
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                      Text(
+                                        quiz2Score.toStringAsFixed(1),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Rump",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                    Text(
-                                      quiz3Score.toStringAsFixed(1),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                  ],
+                                  GestureDetector(
+                                  onTap: (){
+                                    AppCustomNavigator.replace(context, Quiz3(isComplete: true));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Rump",
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                      Text(
+                                        quiz3Score.toStringAsFixed(1),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Mobility ",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                    Text(
-                                      quiz4Score.toStringAsFixed(1),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                  ],
+                                  GestureDetector(
+                                  onTap: (){
+                                    AppCustomNavigator.replace(context, Quiz4(isComplete: true));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Mobility ",
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                      Text(
+                                        quiz4Score.toStringAsFixed(1),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Mammary System",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                    Text(
-                                      quiz5Score.toStringAsFixed(1),
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                    ),
-                                  ],
+                                  GestureDetector(
+                                  onTap: (){
+                                    AppCustomNavigator.replace(context, Quiz5(isComplete: true));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Mammary System",
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                      Text(
+                                        quiz5Score.toStringAsFixed(1),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 2.h),
                               ],

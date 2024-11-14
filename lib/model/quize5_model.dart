@@ -7,12 +7,14 @@ class Quize5Model {
   List<int> percentages;
   String id;
   String score;
+  bool is_complete;
 
   Quize5Model({
     required this.details,
     required this.percentages,
     required this.id,
     required this.score,
+    required this.is_complete,
   });
 
   Quize5Model copyWith({
@@ -20,12 +22,14 @@ class Quize5Model {
     List<int>? percentages,
     String? id,
     String? score,
+    bool? is_complete,
   }) {
     return Quize5Model(
       details: details ?? this.details,
       percentages: percentages ?? this.percentages,
       id: id ?? this.id,
-      score: score ?? this.score,
+      score: score ?? this.score, 
+      is_complete: is_complete ?? this.is_complete,
     );
   }
 
@@ -35,6 +39,7 @@ class Quize5Model {
       'percentages': percentages,
       'id': id,
       'score': score,
+      'is_complete': is_complete,
     };
   }
 
@@ -44,6 +49,7 @@ class Quize5Model {
       percentages: List<int>.from((map['percentages'] as List<dynamic>? ?? []).map((item) => item as int)),
       id: map['id'] as String? ?? '',
       score: map['score'] as String? ?? '',
+      is_complete: map['is_complete'] as bool? ?? false,
     );
   }
 
@@ -54,6 +60,7 @@ class Quize5Model {
       percentages: List<int>.from((data['percentages'] as List<dynamic>? ?? []).map((item) => item as int)),
       id: data['id'] as String? ?? '',
       score: data['score'] as String? ?? '',
+      is_complete: data['is_complete'] as bool? ?? false,
     );
   }
 
@@ -62,15 +69,15 @@ class Quize5Model {
   factory Quize5Model.fromJson(String source) => Quize5Model.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Quize5Model(details: $details, percentages: $percentages, id: $id, score: $score)';
+  String toString() => 'Quize5Model(details: $details,percentages: $percentages, id: $id, score: $score, is_complete: $is_complete)';
 
   @override
   bool operator ==(covariant Quize5Model other) {
     if (identical(this, other)) return true;
 
-    return listEquals(other.details, details) && listEquals(other.percentages, percentages) && other.id == id && other.score == score;
+    return listEquals(other.details, details) && listEquals(other.percentages, percentages) && other.id == id && other.score == score && other.is_complete == is_complete;
   }
 
   @override
-  int get hashCode => details.hashCode ^ percentages.hashCode ^ id.hashCode ^ score.hashCode;
+  int get hashCode => details.hashCode ^ percentages.hashCode ^ id.hashCode ^ score.hashCode^ is_complete.hashCode;
 }

@@ -1,3 +1,4 @@
+import 'package:breedex/view/widget/popup1.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +15,9 @@ import 'package:breedex/view/widget/custom_progress_bar.dart';
 // ignore_for_file: use_build_context_synchronously
 
 
-
-
-
-
-
 class Quiz2 extends StatefulWidget {
-  const Quiz2({super.key});
+     final bool isComplete;
+  const Quiz2({super.key, required this.isComplete});
 
   @override
   State<Quiz2> createState() => _Quiz2State();
@@ -214,7 +211,12 @@ class _Quiz2State extends State<Quiz2> {
                            if (_formKey.currentState!.validate()) {
                               await quizProvider.saveQuiz2Data();
                               if (!quizProvider.isLoading) {
-                                AppCustomNavigator.push(context, const Quiz3());
+                                  if (widget.isComplete) {
+                        final cowId = context.read<CowScoringEntryProvider>().id!;
+                       PopupDialog.show(context, cowId);
+        } else {
+          AppCustomNavigator.push(context, const Quiz3(isComplete: false));
+        }
                               }
                             }
                           },
