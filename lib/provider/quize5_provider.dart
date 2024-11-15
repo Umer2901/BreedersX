@@ -85,6 +85,19 @@ class Quiz5Provider with ChangeNotifier {
       }
     }
   }
+
+    void clearData() {
+    _quizData = Quize5Model(
+      details: List<String>.filled(7, ''), 
+      percentages: [13, 13, 10, 7, 17, 15, 25], 
+      id: '', 
+      score: '0',
+      is_complete: false, 
+    );
+    notifyListeners(); 
+  }
+
+
 }
 
 // import 'dart:math';

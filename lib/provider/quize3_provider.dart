@@ -92,6 +92,17 @@ class Quiz3Provider with ChangeNotifier {
       }
     }
   }
+
+    void clearData() {
+    _quizData = Quize3Model(
+      details: List<String>.filled(7, ''), 
+      percentages: [13, 13, 10, 7, 17, 15, 25], 
+      id: '', 
+      score: '0',
+      is_complete: false, 
+    );
+    notifyListeners(); 
+  }
 }
 
  

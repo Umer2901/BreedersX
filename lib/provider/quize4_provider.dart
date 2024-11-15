@@ -91,5 +91,19 @@ class Quiz4Provider with ChangeNotifier {
         notifyListeners();
       }
     }
+  
   }
+
+    void clearData() {
+    _quizData = Quize4Model(
+      details: List<String>.filled(7, ''), 
+      percentages: [13, 13, 10, 7, 17, 15, 25], 
+      id: '', 
+      score: '0',
+      is_complete: false, 
+    );
+    notifyListeners(); 
+  }
+
+
 }

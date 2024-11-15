@@ -1,9 +1,15 @@
+import 'package:breedex/provider/quize1_provider.dart';
+import 'package:breedex/provider/quize2_provider.dart';
+import 'package:breedex/provider/quize3_provider.dart';
+import 'package:breedex/provider/quize4_provider.dart';
+import 'package:breedex/provider/quize5_provider.dart';
 import 'package:breedex/view/home.dart';
 import 'package:breedex/view/home/Quiz/quiz2.dart';
 import 'package:breedex/view/home/Quiz/quiz3.dart';
 import 'package:breedex/view/home/Quiz/quiz4.dart';
 import 'package:breedex/view/home/Quiz/quiz5.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
@@ -136,24 +142,24 @@ class PopupDialog {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                          
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Category Name: ",
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  scoringEntry.scoringEntry,
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 2.h),
+                          // Row(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Text(
+                          //       "Category Name: ",
+                          //       style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                          //     ),
+                          //     Expanded(
+                          //       child: Text(
+                          //         scoringEntry.scoringEntry,
+                          //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
+                          //         overflow: TextOverflow.ellipsis,
+                          //         softWrap: true,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                       //   SizedBox(height: 2.h),
                         
                            Container(
                             width: double.infinity,
@@ -173,6 +179,7 @@ class PopupDialog {
                                       Icon(Icons.arrow_drop_down),
                                   ],
                                 ),
+                             //    Icon(Icons.edit)
                        
                               ],
                                                        ),
@@ -181,6 +188,7 @@ class PopupDialog {
                                 GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz(isComplete: true));
+                                    Provider.of<Quiz1Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,12 +201,14 @@ class PopupDialog {
                                         quiz1Score.toStringAsFixed(1),
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
+                                       Icon(Icons.edit)
                                     ],
                                   ),
                                 ),
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz2(isComplete: true));
+                                    Provider.of<Quiz2Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,12 +221,14 @@ class PopupDialog {
                                         quiz2Score.toStringAsFixed(1),
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
+                                       Icon(Icons.edit)
                                     ],
                                   ),
                                 ),
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz3(isComplete: true));
+                                    Provider.of<Quiz3Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,12 +241,14 @@ class PopupDialog {
                                         quiz3Score.toStringAsFixed(1),
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
+                                       Icon(Icons.edit)
                                     ],
                                   ),
                                 ),
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz4(isComplete: true));
+                                    Provider.of<Quiz4Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,12 +261,14 @@ class PopupDialog {
                                         quiz4Score.toStringAsFixed(1),
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
+                                       Icon(Icons.edit)
                                     ],
                                   ),
                                 ),
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz5(isComplete: true));
+                                    Provider.of<Quiz5Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -265,6 +281,7 @@ class PopupDialog {
                                         quiz5Score.toStringAsFixed(1),
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
+                                      Icon(Icons.edit)
                                     ],
                                   ),
                                 ),
@@ -295,19 +312,19 @@ class PopupDialog {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton(
-                            text: "Edit",
-                            color: AppColors.grey,
-                            width: 32.w,
-                            onTap: () {
-                             AppCustomNavigator.pop(context);
-                             AppCustomNavigator.pop(context);
-                             AppCustomNavigator.pop(context);
-                             AppCustomNavigator.pop(context);
-                             AppCustomNavigator.pop(context);
-                             AppCustomNavigator.pop(context);
-                            },
-                          ),
+                          // CustomButton(
+                          //   text: "Edit",
+                          //   color: AppColors.grey,
+                          //   width: 32.w,
+                          //   onTap: () {
+                          //    AppCustomNavigator.pop(context);
+                          //    AppCustomNavigator.pop(context);
+                          //    AppCustomNavigator.pop(context);
+                          //    AppCustomNavigator.pop(context);
+                          //    AppCustomNavigator.pop(context);
+                          //    AppCustomNavigator.pop(context);
+                          //   },
+                          // ),
                           CustomButton(
                             text: "Confirm",
                             width: 32.w,

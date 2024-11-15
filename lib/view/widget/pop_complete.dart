@@ -1,5 +1,11 @@
 
+import 'package:breedex/provider/quize1_provider.dart';
+import 'package:breedex/provider/quize2_provider.dart';
+import 'package:breedex/provider/quize3_provider.dart';
+import 'package:breedex/provider/quize4_provider.dart';
+import 'package:breedex/provider/quize5_provider.dart';
 import 'package:breedex/view/home.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:breedex/navigator.dart';
@@ -25,6 +31,11 @@ class PopupDialogComplete {
                 GestureDetector(
                   onTap: () {
                     AppCustomNavigator.replace(context, const HomePage());
+                    Provider.of<Quiz1Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz2Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz3Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz4Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz5Provider>(context, listen: false).clearData();
                   },
                   child: const Align(
                     alignment: Alignment.topRight,
