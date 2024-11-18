@@ -191,16 +191,12 @@ class PopupDialog {
                                     Provider.of<Quiz1Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        "Strength & Substance",
+                                        "Strength & Substance: ${quiz1Score.toStringAsFixed(1)}",
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
-                                      Text(
-                                        quiz1Score.toStringAsFixed(1),
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
+                                      ),                   
                                        Icon(Icons.edit)
                                     ],
                                   ),
@@ -214,13 +210,10 @@ class PopupDialog {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Breed Characteristics ",
+                                        "Breed Characteristics: ${quiz2Score.toStringAsFixed(1)}",
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
-                                      Text(
-                                        quiz2Score.toStringAsFixed(1),
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
+                                     
                                        Icon(Icons.edit)
                                     ],
                                   ),
@@ -234,13 +227,10 @@ class PopupDialog {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Rump",
+                                        "Rump: ${quiz3Score.toStringAsFixed(1)}",
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
-                                      Text(
-                                        quiz3Score.toStringAsFixed(1),
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
+                                  
                                        Icon(Icons.edit)
                                     ],
                                   ),
@@ -254,13 +244,10 @@ class PopupDialog {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Mobility ",
+                                        "Mobility: ${quiz4Score.toStringAsFixed(1)}",
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
-                                      Text(
-                                        quiz4Score.toStringAsFixed(1),
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
+                                    
                                        Icon(Icons.edit)
                                     ],
                                   ),
@@ -274,11 +261,7 @@ class PopupDialog {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Mammary System",
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
-                                      ),
-                                      Text(
-                                        quiz5Score.toStringAsFixed(1),
+                                        "Mammary System: ${quiz5Score.toStringAsFixed(1)}",
                                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                                       ),
                                       Icon(Icons.edit)
