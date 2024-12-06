@@ -50,26 +50,33 @@ class Quiz4Provider with ChangeNotifier {
     }
   }
 
-  void _calculateScore() {
-    double totalScore = 0.0;
+ void _calculateScore() {
+  double totalScore = 0.0;
+  double specificFieldScore = 0.0; 
 
-    for (int i = 0; i < _quizData.details.length; i++) {
-      if (_quizData.details[i].isNotEmpty) {
-        double score;
-        if (i == 3) {
-          final field4Value = double.parse(_quizData.details[i]);
-          score = max(50 - (field4Value - 25).abs() * 2, 0);
-        } else {
-          score = _quizData.percentages[i] *
-              (double.parse(_quizData.details[i]) / 100);
-        }
-        totalScore += score;
+  for (int i = 0; i < _quizData.details.length; i++) {
+    if (_quizData.details[i].isNotEmpty) {
+      double score;
+
+      if (i == 3) { 
+        final field4Value = double.parse(_quizData.details[i]);
+        specificFieldScore = max(50 - (field4Value - 25).abs() * 2, 0);
+        score = (_quizData.percentages[i] / 100) * specificFieldScore;
+        print("Specific Field (Index 3) Score (Weighted): $score");
+      } else {
+        score = _quizData.percentages[i] *
+            (double.parse(_quizData.details[i]) / 100);
       }
-    }
 
-    totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
-    _quizData = _quizData.copyWith(score: totalScore.toString());
+      totalScore += score;
+    }
   }
+  print("Total Score Before Adjustment: $totalScore");
+  totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
+  print("Final Score: $totalScore");
+  _quizData = _quizData.copyWith(score: totalScore.toString());
+}
+
 
   Future<void> saveQuiz4Data() async {
     _setLoading(true);
@@ -97,7 +104,7 @@ class Quiz4Provider with ChangeNotifier {
     void clearData() {
     _quizData = Quize4Model(
       details: List<String>.filled(7, ''), 
-      percentages: [13, 13, 10, 7, 17, 15, 25], 
+       percentages: [35, 20, 10, 10, 15, 10],
       id: '', 
       score: '0',
       is_complete: false, 

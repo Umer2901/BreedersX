@@ -132,7 +132,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               );
 
                               if (authProvider.user != null) {
-                                AppCustomNavigator.replace(context, const NewHerd());
+
+                                 Future.delayed(const Duration(seconds: 3), () {
+    AppCustomNavigator.replace(context, const LoginScreen());
+  });
+                            
+                                
                               }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -106,13 +106,13 @@ class _CowScoringState extends State<CowScoring> {
                   ),
                   SizedBox(height: 3.h),
                     Text(
-                    'Cow Id',
+                    'Registration Id',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                     CustomTextField(
                     enableBorder: true,
                     name: 'cowid',
-                    hintText: 'Cow Id',
+                    hintText: 'Registration Id',
                     fillColor: AppColors.white,
                     validator: FormBuilderValidators.required(),
                   ),

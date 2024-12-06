@@ -50,26 +50,36 @@ class Quiz3Provider with ChangeNotifier {
     }
   }
 
-   void _calculateScore() {
-    double totalScore = 0.0;
+void _calculateScore() {
+  double totalScore = 0.0;
+  double specificFieldRawScore = 0.0;
+  double specificFieldWeightedScore = 0.0;
 
-    for (int i = 0; i < _quizData.details.length; i++) {
-      if (_quizData.details[i].isNotEmpty) {
-        double score;
-        if (i == 1) {
-          final field2Value = double.parse(_quizData.details[i]);
-          score = max(50 - (field2Value - 25).abs() * 2, 0);
-        } else {
-          score = _quizData.percentages[i] *
-              (double.parse(_quizData.details[i]) / 100);
-        }
-        totalScore += score;
+  for (int i = 0; i < _quizData.details.length; i++) {
+    if (_quizData.details[i].isNotEmpty) {
+      double score;
+
+      if (i == 1) {
+        final field2Value = double.parse(_quizData.details[i]);
+        specificFieldRawScore = max(50 - (field2Value - 25).abs() * 2, 0);
+        specificFieldWeightedScore = (_quizData.percentages[i] / 100) * specificFieldRawScore;
+        score = specificFieldWeightedScore;
+        print("Field 2 Raw Score (Without Weightage): $specificFieldRawScore");
+        print("Field 2 Weighted Score (With Weightage): $specificFieldWeightedScore");
+      } else {
+        score = _quizData.percentages[i] *
+            (double.parse(_quizData.details[i]) / 100);
       }
-    }
 
-    totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
-    _quizData = _quizData.copyWith(score: totalScore.toString());
+      totalScore += score;
+    }
   }
+  print("Total Score Before Adjustment: $totalScore");
+  totalScore = min(max(totalScore * ((97 - 63) / 50) + 63, 63), 97);
+  print("Final Score: $totalScore");
+  _quizData = _quizData.copyWith(score: totalScore.toString());
+}
+
 
   Future<void> saveQuiz3Data() async {
     _setLoading(true);
@@ -96,13 +106,14 @@ class Quiz3Provider with ChangeNotifier {
     void clearData() {
     _quizData = Quize3Model(
       details: List<String>.filled(7, ''), 
-      percentages: [13, 13, 10, 7, 17, 15, 25], 
+     percentages: [22, 26, 26, 26,],
       id: '', 
       score: '0',
       is_complete: false, 
     );
     notifyListeners(); 
   }
+
 }
 
  
