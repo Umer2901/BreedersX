@@ -1,35 +1,54 @@
+
+import 'package:breedex/provider/quize1_provider.dart';
+import 'package:breedex/provider/quize2_provider.dart';
+import 'package:breedex/provider/quize3_provider.dart';
+import 'package:breedex/provider/quize4_provider.dart';
+import 'package:breedex/provider/quize5_provider.dart';
+import 'package:breedex/view/home.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:breedex/navigator.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/constants/images.dart';
 
-
-
-
 class PopupDialogComplete {
-  static void show(BuildContext context) {
+  static void show(BuildContext context, int finalScore) {
+    String message = getMessageForScore(finalScore);
+
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.40, 
+          heightFactor: 0.40,
           child: AlertDialog(
             backgroundColor: AppColors.white,
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                  const Align(
+                GestureDetector(
+                  onTap: () {
+                    AppCustomNavigator.replace(context, const HomePage());
+                    Provider.of<Quiz1Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz2Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz3Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz4Provider>(context, listen: false).clearData();
+                    Provider.of<Quiz5Provider>(context, listen: false).clearData();
+                  },
+                  child: const Align(
                     alignment: Alignment.topRight,
-                    child: Icon(Icons.cancel_outlined)),
-                  SizedBox(
-                      height: 12.h,
-                      width: 12.w,
-                      child: Image.asset(AppImages.check),
-                    ),
-              
+                    child: Icon(Icons.cancel_outlined),
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                  width: 12.w,
+                  child: Image.asset(AppImages.check),
+                ),
                 Text(
-                  "Excellent 90+",
+                  message,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(),
                 ),
               ],
@@ -39,18 +58,36 @@ class PopupDialogComplete {
                 SizedBox(
                   height: 2.h,
                 ),
-                Text(
-                  "Lorem Ipsum is simply dummy tex",
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(),
-                ),
+                // Text(
+                //   "Lorem Ipsum is simply dummy text.",
+                //   style: Theme.of(context).textTheme.bodySmall!.copyWith(),
+                // ),
                 SizedBox(
                   height: 2.h,
                 ),
-            
-            ],
+              ],
+            ),
           ),
-          )  );
+        );
       },
     );
+  }
+
+  static String getMessageForScore(int score) {
+    if (score >= 90) {
+      return "Excellent $score";
+    } else if (score >= 85) {
+      return "Very Good $score";
+    } else if (score >= 80) {
+      return "Good Plus $score";
+    } else if (score >= 75) {
+      return "Good $score";
+    } else if (score >= 70) {
+      return "Fair $score";
+    } else if (score >= 65) {
+      return "Poor $score";
+    } else {
+      return "Below Threshold $score";
+    }
   }
 }

@@ -1,4 +1,4 @@
-package com.example.breedex
+package com.production.breedex
 
 import io.flutter.embedding.android.FlutterActivity
 

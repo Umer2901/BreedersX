@@ -3,6 +3,9 @@
     "project_number": "904534866902",
     "project_id": "breedex-8ce46",
     "storage_bucket": "breedex-8ce46.appspot.com"
+    "project_number": "904534866902",
+    "project_id": "breedex-8ce46",
+    "storage_bucket": "breedex-8ce46.appspot.com"
   },
   "client": [
     {
@@ -81,6 +84,7 @@
       ],
       "api_key": [
         {
+          "current_key": "AIzaSyCzFEXKKnnVl0JKM1koQBZVKqfQ9YPzjTA"
           "current_key": "AIzaSyCzFEXKKnnVl0JKM1koQBZVKqfQ9YPzjTA"
         }
       ],

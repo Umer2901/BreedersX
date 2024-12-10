@@ -1,10 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:breedex/view/home.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:breedex/navigator.dart';
 import 'package:breedex/model/herd_model.dart';
 import 'package:breedex/constants/colors.dart';
 import 'package:breedex/view/widget/textfield.dart';
-import 'package:breedex/services/herd_services.dart';
+import 'package:breedex/provider/herd_provider.dart';
 import 'package:breedex/view/widget/custom_button.dart';
 import 'package:breedex/view/home/cow_scoring_entry.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -26,14 +30,19 @@ class _NewHerdState extends State<NewHerd> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(
-                50,
+          child: GestureDetector(
+            onTap: () {
+              AppCustomNavigator.replace(context, HomePage());
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(
+                  50,
+                ),
               ),
+              child: const Icon(Icons.arrow_back),
             ),
-            child: const Icon(Icons.arrow_back),
           ),
         ),
         centerTitle: true,
@@ -75,10 +84,6 @@ class _NewHerdState extends State<NewHerd> {
                     hintText: 'Your Location',
                     fillColor: AppColors.white,
                     validator: FormBuilderValidators.required(),
-                    suffixIcon: const Icon(
-                      Icons.arrow_downward,
-                      color: AppColors.primary,
-                    ),
                   ),
                   SizedBox(height: 3.h),
                   Text(
@@ -94,20 +99,40 @@ class _NewHerdState extends State<NewHerd> {
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 4.h),
-                  CustomButton(
-                    text: 'Next',
-                    onTap: () async {
-                      if (_formKey.currentState?.saveAndValidate() ?? false) {
-                        final herd = HerdModel(
-                            name: _formKey.currentState?.value['name'],
-                            location: _formKey.currentState?.value['Location'],
-                            headScore: _formKey.currentState?.value['head'],
-                            id: '3333');
-                        await HerdServices().addHerd(herd);
-                        AppCustomNavigator.push(context, const CowScoring());
-                      }
-                    },
-                  ),
+                  Consumer<HerdProvider>(
+                      builder: (context, herdProvider, child) {
+                    return Column(
+                      children: [
+                        CustomButton(
+                          text: 'Next',
+                          onTap: () async {
+                            if (_formKey.currentState?.saveAndValidate() ??
+                                false) {
+                              final herd = HerdModel(
+                                  name: _formKey.currentState?.value['name'],
+                                  location:
+                                      _formKey.currentState?.value['Location'],
+                                  headScore:
+                                      _formKey.currentState?.value['head'],
+                                  id: '3333');
+                            final herdId = await herdProvider.addHerd(herd);
+                                if (herdId != null && !herdProvider.isLoading) {
+                                  AppCustomNavigator.push(
+                                    context,
+                                    CowScoring(herdId: herdId), // Use the retrieved herdId here
+                                  );
+                                }
+                            }
+                          },
+                        ),
+                        if (herdProvider.isLoading)
+                          Padding(
+                            padding: EdgeInsets.only(top: 2.h),
+                            child: const CircularProgressIndicator(),
+                          ),
+                      ],
+                    );
+                  }),
                   SizedBox(height: 4.h),
                 ],
               ),

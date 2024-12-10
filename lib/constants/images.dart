@@ -9,4 +9,8 @@ class AppImages {
   static const apple = "assets/images/apple.png";
   static const check = "assets/images/check.png";
   static const user = "assets/images/user.png";
+  static const power = "assets/images/power.png";
+  static const add = "assets/images/add.png";
+  static const horn2 = "assets/images/horn2.jpg";
+  static const breedex = "assets/images/breedex.jpeg";
 }
