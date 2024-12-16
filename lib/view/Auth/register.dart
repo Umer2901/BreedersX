@@ -64,6 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomTextField(
                   controller: _passwordController,
+                  keyboardType: TextInputType.text,
                   enableBorder: true,
                   name: 'password',
                   hintText: '*******',
@@ -89,6 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomTextField(
                   controller: _confirmPasswordController,
+                  keyboardType: TextInputType.text,
                   enableBorder: true,
                   name: 'confirm_password',
                   hintText: '******',

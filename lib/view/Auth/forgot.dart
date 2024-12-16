@@ -66,6 +66,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 SizedBox(height: 1.h),
                 CustomTextField(
                   controller: _emailController,
+                  keyboardType: TextInputType.text,
                   enableBorder: true,
                   name: 'email',
                   hintText: 'Your email',

@@ -66,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   enableBorder: true,
                   name: 'password',
                   hintText: 'Password',
+                  keyboardType: TextInputType.text,
                   obscureText: obsecurePassword,
                   fillColor: AppColors.white,
                   suffixIcon: InkWell(

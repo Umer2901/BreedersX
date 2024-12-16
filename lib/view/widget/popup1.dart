@@ -54,7 +54,12 @@ class PopupDialog {
             final quiz3Score = data?['quiz3Score'] != null ? double.parse(data!['quiz3Score']) : 0;
             final quiz4Score = data?['quiz4Score'] != null ? double.parse(data!['quiz4Score']) : 0;
             final quiz5Score = data?['quiz5Score'] != null ? double.parse(data!['quiz5Score']) : 0;
-            final finalScore = (quiz1Score * 0.2 + quiz2Score * 0.25 + quiz3Score * 0.15 + quiz4Score * 0.20 + quiz5Score * 0.20).toStringAsFixed(1);
+            final double calculatedFinalScore = quiz1Score * 0.2 + quiz2Score * 0.25 + quiz3Score * 0.15 + quiz4Score * 0.20 + quiz5Score * 0.20;
+final int roundedFinalScore = (calculatedFinalScore - calculatedFinalScore.floor() >= 0.5)
+    ? calculatedFinalScore.ceil()
+    : calculatedFinalScore.floor();
+final String finalScore = roundedFinalScore.toString();
+
             final scoringEntryId = data?['id'] as String?;
 
             if (scoringEntryId == null) {

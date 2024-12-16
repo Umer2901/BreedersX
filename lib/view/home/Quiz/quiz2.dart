@@ -34,7 +34,7 @@ class _Quiz2State extends State<Quiz2> {
     ListItem(text: 'Disposition: Calm, easy demeanor', percentage: '15%',weight: 15.0),
     ListItem(text: 'Body Condition: Appropriate for the stage of lactation/environment', percentage: '10%',weight: 10.0),
     ListItem(text: 'Breed Characteristics: Overall style, strength, and balance. Head should be feminine', percentage: '10%',weight: 10.0),
-    ListItem(text: 'Poll: Flat and upward V-shape', percentage: '20%',weight: 20.0),
+    ListItem(text: 'Poll: Flat and upward no V-shape', percentage: '20%',weight: 20.0),
     ListItem(text: 'Brisket: Clean & free of excess fleshiness', percentage: '10%',weight: 10.0),
     ListItem(text: 'Horns: Adequete length. Horn base tied in smoothly. No bulbous base or ballooned.', percentage: '10%',weight: 10.0),
     ListItem(text: 'Tail: Long and slender', percentage: '5%',weight: 5.0),
