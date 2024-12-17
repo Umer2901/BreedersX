@@ -6,23 +6,30 @@ class Quize1Services {
   static final _cowScoringCollection = FirebaseFirestore.instance.collection('Cow Scoring');
 
   Future<void> addQuize1Data(Quize1Model quize) async {
-    try {
-      await _quize1Collection.add(quize.toMap());
-      await _updateCowScoringWithQuizScore(quize.id, quize.score);
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error adding quiz: $e');
-    }
+  try {
+    await _quize1Collection.add(quize.toMap());
+    await _updateCowScoringWithQuizScore(quize.id, quize.score, quize.details);
+  } catch (e) {
+    print('Error adding quiz: $e');
   }
+}
 
-  Future<void> _updateCowScoringWithQuizScore(String cowId, String score) async {
-    try {
-      await _cowScoringCollection.doc(cowId).update({'quiz1Score': score});
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error updating cow scoring: $e');
-    }
+
+  Future<void> _updateCowScoringWithQuizScore(String cowId, String score, List<String> details) async {
+  try {
+    Map<String, String> detailsMap = {
+      for (int i = 0; i < details.length; i++) 'detail${i + 1}': details[i]
+    };
+
+    await _cowScoringCollection.doc(cowId).set({
+      'quiz1Score': score,          
+      'quiz1Detail': detailsMap,    
+    }, SetOptions(merge: true));
+  } catch (e) {
+    print('Error updating cow scoring: $e');
   }
+}
+
 
   Future<Quize1Model?> getQuizeDataByCowId(String cowId) async {
   try {
