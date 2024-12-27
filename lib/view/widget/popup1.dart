@@ -193,7 +193,7 @@ final String finalScore = roundedFinalScore.toString();
                                 GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz(isComplete: true));
-                                    Provider.of<Quiz1Provider>(context, listen: false).clearData();
+                                    //Provider.of<Quiz1Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -209,7 +209,7 @@ final String finalScore = roundedFinalScore.toString();
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz2(isComplete: true));
-                                    Provider.of<Quiz2Provider>(context, listen: false).clearData();
+                                   // Provider.of<Quiz2Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -226,7 +226,7 @@ final String finalScore = roundedFinalScore.toString();
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz3(isComplete: true));
-                                    Provider.of<Quiz3Provider>(context, listen: false).clearData();
+                                    //Provider.of<Quiz3Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,7 +243,7 @@ final String finalScore = roundedFinalScore.toString();
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz4(isComplete: true));
-                                    Provider.of<Quiz4Provider>(context, listen: false).clearData();
+                                   // Provider.of<Quiz4Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,7 +260,7 @@ final String finalScore = roundedFinalScore.toString();
                                   GestureDetector(
                                   onTap: (){
                                     AppCustomNavigator.replace(context, Quiz5(isComplete: true));
-                                    Provider.of<Quiz5Provider>(context, listen: false).clearData();
+                                  //  Provider.of<Quiz5Provider>(context, listen: false).clearData();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -298,7 +298,7 @@ final String finalScore = roundedFinalScore.toString();
                     ),
                     actions: <Widget>[
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // CustomButton(
                           //   text: "Edit",
@@ -318,6 +318,11 @@ final String finalScore = roundedFinalScore.toString();
                             width: 32.w,
                             onTap: () {
                               PopupDialogComplete.show(context, finalScoreInt);
+                                Provider.of<Quiz1Provider>(context, listen: false).clearData();
+                                 Provider.of<Quiz2Provider>(context, listen: false).clearData();
+                                  Provider.of<Quiz3Provider>(context, listen: false).clearData();
+                                   Provider.of<Quiz4Provider>(context, listen: false).clearData();
+                                    Provider.of<Quiz5Provider>(context, listen: false).clearData();
                             },
                           ),
                         ],

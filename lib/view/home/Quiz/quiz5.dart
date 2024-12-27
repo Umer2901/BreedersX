@@ -61,19 +61,31 @@ class _Quiz5State extends State<Quiz5> {
         weight: 10.0),
   ];
    bool _isInit = true;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_isInit) {
-      final quizProvider = context.read<Quiz5Provider>();
-      quizProvider.setBuilding(true);
-      quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        quizProvider.setBuilding(false);
-      });
-      _isInit = false;
+@override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  if (_isInit) {
+    final quizProvider = context.read<Quiz5Provider>();
+    quizProvider.setBuilding(true);
+    quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+
+    // Ensure the number of controllers matches the details list length
+    final numberOfDetails = quizProvider.quizData.details.length;
+    if (numberOfDetails > _controllers.length) {
+      _controllers.addAll(List.generate(numberOfDetails - _controllers.length, (index) => TextEditingController()));
     }
+    // Set text for the controllers from quizData.details
+    for (int i = 0; i < numberOfDetails; i++) {
+      _controllers[i].text = quizProvider.quizData.details[i];
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quizProvider.setBuilding(false);
+    });
+    _isInit = false;
   }
+}
+
 
   String? _validateInput(String? value) {
     if (value == null || value.isEmpty) {

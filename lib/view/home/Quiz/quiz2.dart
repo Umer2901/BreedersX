@@ -27,14 +27,13 @@ class _Quiz2State extends State<Quiz2> {
   final List<TextEditingController> _controllers =
       List.generate(10, (index) => TextEditingController());
   final _formKey = GlobalKey<FormState>();
-  int selectedOption = -1;
  final List<ListItem> items = [
     ListItem(text: 'Ribs: Well sprung - not slab sided', percentage: '10%',
         weight: 10.0),
     ListItem(text: 'Disposition: Calm, easy demeanor', percentage: '15%',weight: 15.0),
     ListItem(text: 'Body Condition: Appropriate for the stage of lactation/environment', percentage: '10%',weight: 10.0),
     ListItem(text: 'Breed Characteristics: Overall style, strength, and balance. Head should be feminine', percentage: '10%',weight: 10.0),
-    ListItem(text: 'Poll: Flat and upward no V-shape', percentage: '20%',weight: 20.0),
+    ListItem(text: 'Poll: Flat and no upward V-shape', percentage: '20%',weight: 20.0),
     ListItem(text: 'Brisket: Clean & free of excess fleshiness', percentage: '10%',weight: 10.0),
     ListItem(text: 'Horns: Adequete length. Horn base tied in smoothly. No bulbous base or ballooned.', percentage: '10%',weight: 10.0),
     ListItem(text: 'Tail: Long and slender', percentage: '5%',weight: 5.0),
@@ -42,12 +41,8 @@ class _Quiz2State extends State<Quiz2> {
     ListItem(text: 'Ears: Rounded help up tight to horn', percentage: '5%',weight: 5.0),
   ];
 
- bool _isInit = true;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+ bool _isInit = true;
 
   @override
   void didChangeDependencies() {
@@ -56,12 +51,19 @@ class _Quiz2State extends State<Quiz2> {
       final quizProvider = context.read<Quiz2Provider>();
       quizProvider.setBuilding(true);
       quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+
+      // Set the text of the controllers to match the saved data
+      for (int i = 0; i < quizProvider.quizData.details.length; i++) {
+        _controllers[i].text = quizProvider.quizData.details[i];
+      }
+
       WidgetsBinding.instance.addPostFrameCallback((_) {
         quizProvider.setBuilding(false);
       });
       _isInit = false;
     }
   }
+
 
   String? _validateInput(String? value) {
     if (value == null || value.isEmpty) {

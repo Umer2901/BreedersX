@@ -13,7 +13,7 @@ import 'package:breedex/provider/scoring_entry_provider.dart';
 import 'package:breedex/view/widget/custom_progress_bar.dart';
 
 class Quiz extends StatefulWidget {
-    final bool isComplete;
+  final bool isComplete;
   const Quiz({super.key, required this.isComplete});
 
   @override
@@ -44,6 +44,12 @@ class _QuizState extends State<Quiz> {
       final quizProvider = context.read<Quiz1Provider>();
       quizProvider.setBuilding(true);
       quizProvider.setId(context.read<CowScoringEntryProvider>().id!);
+
+      // Set the text of the controllers to match the saved data
+      for (int i = 0; i < quizProvider.quizData.details.length; i++) {
+        _controllers[i].text = quizProvider.quizData.details[i];
+      }
+
       WidgetsBinding.instance.addPostFrameCallback((_) {
         quizProvider.setBuilding(false);
       });
@@ -166,7 +172,7 @@ class _QuizState extends State<Quiz> {
                                   keyboardType: TextInputType.number,
                                   controller: _controllers[index],
                                   onChanged: (value) {
-                                    quizProvider.addDetail(index, value!);
+                                    quizProvider.addDetail(index, value!);  // Update the provider
                                   },
                                   validator: _validateInput,
                                 ),
@@ -194,13 +200,12 @@ class _QuizState extends State<Quiz> {
                             if (_formKey.currentState!.validate()) {
                               await quizProvider.saveQuizData();
                               if (!quizProvider.isLoading) {
-                                 if (widget.isComplete) {
-                        final cowId = context.read<CowScoringEntryProvider>().id!;
-                       PopupDialog.show(context, cowId);
-        } else {
-          AppCustomNavigator.push(context, const Quiz2(isComplete: false));
-        }
-                              //  AppCustomNavigator.push(context, const Quiz2());
+                                if (widget.isComplete) {
+                                  final cowId = context.read<CowScoringEntryProvider>().id!;
+                                  PopupDialog.show(context, cowId);
+                                } else {
+                                  AppCustomNavigator.push(context, const Quiz2(isComplete: false));
+                                }
                               }
                             }
                           },

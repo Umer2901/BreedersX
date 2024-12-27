@@ -83,7 +83,7 @@ class Quiz2Provider with ChangeNotifier {
   }
     void clearData() {
     _quizData = Quize2Model(
-      details: List<String>.filled(7, ''), 
+      details: List<String>.filled(10, ''), 
       percentages: [10, 15, 10, 10, 20, 10, 10, 5, 5, 5],
       id: '', 
       score: '0',
